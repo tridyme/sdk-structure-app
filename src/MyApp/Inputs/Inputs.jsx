@@ -18,7 +18,7 @@ const Inputs = ({
   updateValue
 }) => {
   return (
-    <Col xs={6} className="">
+    <Col md={6} className="">
       <h3>My Inputs :</h3>
       <h4>Rectangle</h4>
       <InputElem 

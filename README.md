@@ -1,70 +1,159 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<a href="http://triazur.com"><img style="width:55px;height:55px" width="100" height="100" src="https://www.triazur.com/static/TriAzurIcon-40ace683b384504022a625add24052b7.png?v=3&s=50" title="Triazur" alt="Triazur"></a>
 
-## Available Scripts
+# TRIAZUR_PLUGIN
 
-### `npm install`
+> This project let you write and publish your own triazur plugin applications, when it's done you could share it in triazur app store  
 
-In the project directory, you can run:
+> Contribute to expand the futur !
 
-### `npm start`
+---
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+***DEMO***
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- Use <a href="http://recordit.co/" target="_blank">**Recordit**</a> to create quicks screencasts of your desktop and export them as `GIF`s.
+- For terminal sessions, there's <a href="https://github.com/chjj/ttystudio" target="_blank">**ttystudio**</a> which also supports exporting `GIF`s.
 
-### `npm test`
+**Recordit**
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Recordit GIF](http://g.recordit.co/iLN6A0vSD8.gif)
 
-### `npm run build`
+**ttystudio**
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![ttystudio GIF](https://raw.githubusercontent.com/chjj/ttystudio/master/img/example.gif)
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Table of Contents (Optional)
 
-### `npm run eject`
+> If you're `README` has a lot of info, section headers might be nice.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [Installation](#installation)
+- [Plugin](#features)
+- [Contributing](#contributing)
+- [FAQ](#faq)
+- [Support](#support)
+- [License](#license)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Installation
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+To run this project your need to install :
 
-## Learn More
+- The recommended version of NodeJS : https://nodejs.org/en/
+- NodeJS package manager : https://www.npmjs.com/get-npm
+- Distribued version control system :https://git-scm.com/downloads
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Clone
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Clone this repo to your local machine using `git clone https://gitlab.com/alexis1990/triazur_plugin.git yourownfoldername
 
-### Code Splitting
+### Setup
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+> now enter into the folder :
 
-### Analyzing the Bundle Size
+```shell
+$ cd ./yourownfoldername
+$ npm install
+$ npm start
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+---
 
-### Making a Progressive Web App
+## Plugin
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+- The only folder you need to modify is myApp so enter into :
 
-### Advanced Configuration
+```shell
+$ cd ./myApp
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+- The project was divided into three folder  :
+    
+    - **Calculations**
+        - Let you write your calcul
 
-### Deployment
+    - **Inputs**
+        - Let you write and add more input values
+    
+    - **Outputs**
+        - Let you write and add more output values
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+- To add Input/Output you need to duplicate the HTML tag  :
 
-### `npm run build` fails to minify
+```html
+    <InputElem 
+        data={inputsData.b} //Refer to initialState, b key value
+        updateValue={updateValue} //Refer to MyApp.jsx method
+    />
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+or
+
+```html
+    <OutputElem 
+        data={inputsData.b}
+        updateValue={updateValue}
+    />
+```
+
+```javascript
+let code = project => {
+  let code = [];
+  for (let js = 0; js < project.length; js++) {
+    i++;
+  }
+};
+```
+
+## Publish (Optional)
+## Tests (soon...)
+
+- Going into more detail on code and technologies used
+- I utilized this nifty <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown Cheatsheet</a> for this sample `README`.
+
+---
+
+## Contributing
+
+> To get started...
+
+### Step 1
+
+- **Option 1**
+    - 🍴 Fork this repo!
+
+- **Option 2**
+    - 👯 Clone this repo to your local machine using `https://gitlab.com/alexis1990/triazur_plugin.git`
+
+### Step 2
+
+- **Code** 🔨
+
+### Step 3
+
+- 🔃 Create a new pull request using <a href="https://github.com/alexis1990/triazur_plugin/compare/" target="_blank">`https://github.com/alexis1990/triazur_plugin/compare/`</a>.
+
+---
+
+## FAQ
+
+- **Let us know your questions?**
+    - No problem! Just do it.
+
+---
+
+## Support
+
+Contact us!
+
+- Website at <a href="http://triazur.com" target="_blank">`triazur.com`</a>
+- Email at <a href="mailto:contact@triazur.com" target="_blank">`contact@triazur.com`</a>
+
+---
+
+## License
+
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+
+- **[MIT license](http://opensource.org/licenses/mit-license.php)**
+- Copyright 2019 © <a href="http://triazur.com" target="_blank">TRIAZUR</a>.

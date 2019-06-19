@@ -18,7 +18,7 @@ const Outputs = ({
   outputsData
 }) => {
   return (
-    <Col xs={6} className="result">
+    <Col md={6} className="result">
       <h3>Outputs :</h3>
       <h4>Surface Rectangle :</h4>
       <OutputElem 

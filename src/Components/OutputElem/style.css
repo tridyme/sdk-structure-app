@@ -1,0 +1,28 @@
+.outputElem {
+  max-width: 350px;
+  margin: 10px;
+}
+
+.outputElem .groupAddon .groupText {
+  width: 50px;
+  background-color: transparent;
+  border: 0;
+  overflow: hidden;
+}
+
+.outputElem .groupInfo {
+  background-color: transparent;
+  font-weight: bold;
+  border: 0;
+  overflow: hidden;
+}
+
+.outputElem .inputValue {
+  color: blue;
+  min-width: 3em;
+}
+
+.outputElem .inputUnit {
+  min-width: 3em;
+  max-width: 6em;
+}

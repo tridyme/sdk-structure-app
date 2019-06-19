@@ -1,0 +1,17 @@
+.myapp-container{
+    margin-top: 80px;
+    position: relative;
+}
+
+.myapp-container h3{
+    text-align: left;
+}
+
+.myapp-container .result span{
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.myapp-container .result span:nth-child(1){
+    padding: 0 5px;
+}

@@ -122,15 +122,14 @@ $ heroku login
 $ heroku create
 $ git push heroku master
 #   Launching... done
-#      **http://example.herokuapp.com** deployed to Heroku
+#      http://example.herokuapp.com deployed to Heroku
 ```
 
 Your app should now be running on **http://example.herokuapp.com**.
 
 ## Tests (soon...)
 
-- Going into more detail on code and technologies used
-- I utilized this nifty <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown Cheatsheet</a> for this sample `README`.
+You can unit test your calculations : https://facebook.github.io/create-react-app/docs/running-tests
 
 ---
 

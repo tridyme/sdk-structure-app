@@ -105,7 +105,7 @@ let code = project => {
 };
 ```
 
-## Publish (Optional)
+## Publish
 
 First install heroku locally :
 
@@ -127,9 +127,37 @@ $ git push heroku master
 
 Your app should now be running on **http://example.herokuapp.com**.
 
-## Tests (soon...)
+## Tests
 
-You can unit test your calculations : https://facebook.github.io/create-react-app/docs/running-tests
+You can unit test your calculation functions :
+
+Refer to **src/MyApp/Calculations/calculations.test.js**
+> Note: To create new tests, prefix your files with **.test.js** (auto detection when you run npm test)
+
+```javascript
+it('surfaceRectangle() should return surface of square', () => {
+    //Declare your input data
+    const input = {
+        h: {
+            value: 2
+        },
+        b: {
+            value: 2
+        }
+    }
+
+    //Test if input equal desired output
+    expect(calculationFunctions.surfaceRectangle(input)).toEqual(4);
+});
+```
+
+Run this test with the command :
+
+```shell
+npm test
+```
+
+
 
 ---
 

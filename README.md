@@ -106,6 +106,27 @@ let code = project => {
 ```
 
 ## Publish (Optional)
+
+First install heroku locally :
+
+- Create your heroku account : https://signup.heroku.com/login
+- Follow this link to install heroku : https://devcenter.heroku.com/articles/heroku-cli#download-and-install
+
+Use Git to deploy your application to Heroku :
+
+```shell
+$ git add .
+$ git commit -m "Added a Procfile."
+$ heroku login
+#   Heroku credentials
+$ heroku create
+$ git push heroku master
+#   Launching... done
+#      **http://example.herokuapp.com** deployed to Heroku
+```
+
+Your app should now be running on **http://example.herokuapp.com**.
+
 ## Tests (soon...)
 
 - Going into more detail on code and technologies used

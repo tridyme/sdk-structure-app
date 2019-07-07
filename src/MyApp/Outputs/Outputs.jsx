@@ -8,7 +8,10 @@ import {
   FormGroup,
   Input,
   Label,
-  Button
+  Button,
+  Card,
+  CardHeader,
+  CardBody
 } from 'reactstrap';
 import OutputElem from '../../Components/OutputElem';
 import calculationFunctions from '../Calculations/calculations';
@@ -19,18 +22,23 @@ const Outputs = ({
 }) => {
   return (
     <Col md={6} className="result">
-      <h3>Outputs :</h3>
-      <h4>Surface Rectangle :</h4>
-      <OutputElem 
-        data={outputsData.A}
-        inputsData={inputsData}
-        calculationFunctions={calculationFunctions.surfaceRectangle}
-      />
-      <OutputElem 
-        data={outputsData.Ixx}
-        inputsData={inputsData}
-        calculationFunctions={calculationFunctions.inertiaXX}
-      />
+      <Card>
+        <CardHeader>
+          My Outputs
+        </CardHeader>
+        <CardBody>
+          <OutputElem 
+            data={outputsData.A}
+            inputsData={inputsData}
+            calculationFunctions={calculationFunctions.surfaceRectangle}
+          />
+          <OutputElem 
+            data={outputsData.Ixx}
+            inputsData={inputsData}
+            calculationFunctions={calculationFunctions.inertiaXX}
+          />
+        </CardBody>
+      </Card>
     </Col>
   )
 }

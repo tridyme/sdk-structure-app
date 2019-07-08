@@ -12,7 +12,9 @@
     "react-dom": "^16.8.6",
     "react-icons": "^3.5.0",
     "react-router-dom": "^5.0.0",
-    "reactstrap": "^7.1.0"
+    "reactstrap": "^7.1.0",
+    "env-cmd": "^8.0.2",
+    "react-scripts": "2.1.8"
   },
   "devDependencies": {
     "env-cmd": "^8.0.2",

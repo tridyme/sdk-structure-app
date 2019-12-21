@@ -13,6 +13,7 @@ const chartData = (data) => {
       ],
       borderWidth: 3,
       lineTension: 0,
+      showLine: true,
       fill: 1
     }]
   };

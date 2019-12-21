@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import update from 'immutability-helper';
 import { fromJS } from 'immutable';
-import calculationFunctions from './Calculations/calculations';
 import PropTypes from 'prop-types';
 import {
   Col,
   Row,
   Container
 } from 'reactstrap';
-import './MyApp.css';
+import Layout from '../../Components/Layout';
 import Inputs from './Inputs';
 import Outputs from './Outputs';
 
@@ -33,7 +32,7 @@ function MyApp(props) {
   }
 
   return (
-    <Container className="myapp-container">
+    <Layout>
       <Row>
         <Inputs 
           inputsData={appData.inputs}
@@ -45,7 +44,7 @@ function MyApp(props) {
           updateValue={updateValue}
         />
       </Row>
-    </Container>
+    </Layout>
   );
 }
 

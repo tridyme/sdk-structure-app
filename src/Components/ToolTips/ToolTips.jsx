@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Tooltip, InputGroupText } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { FaInfoCircle } from 'react-icons/fa/';
-import './style.css';
+import './ToolTips.css';
 
 const ToolTips = (props) => {
   const [status, setStatus] = useState(false);

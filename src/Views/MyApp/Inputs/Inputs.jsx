@@ -13,9 +13,9 @@ import {
   CardHeader,
   CardBody
 } from 'reactstrap';
-import ChartElem from '../../Components/ChartElem';
-import InputElem from '../../Components/InputElem';
-import { Scatter } from 'react-chartjs-2';
+import ChartElem from '../../../Components/ChartElem';
+import InputElem from '../../../Components/InputElem';
+
 const Inputs = ({
   inputsData,
   updateValue

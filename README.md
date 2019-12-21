@@ -95,7 +95,7 @@ Cette application permet de calculer la surface d'un rectangle ainsi que son ine
 A présent, nous souhaitons pouvoir également calculer l'inertie du rectangle suivant Y.
 
 Afin de modifier notre application, allez dans le dossier `src`. 
-On y trouve le point d’entrée de l’application `src/index.js` ainsi que le composant <a href="https://fr.reactjs.org/" target="_blank">**React.js**</a> contenant notre application à savoir `src/MyApp.jsx`.
+On y trouve le point d’entrée de l’application `src/index.js` ainsi que le composant <a href="https://fr.reactjs.org/" target="_blank">**React.js**</a> contenant notre application à savoir `src/Views/MyApp.jsx`.
 
 Cependant afin de rajouter notre calcul, seul les quatres fichiers suivant nous intéressent:
 

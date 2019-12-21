@@ -14,7 +14,7 @@ import {
   InputGroupText,
 } from 'reactstrap';
 import ToolTips from '../ToolTips';
-import './style.css';
+import './OutputElem.css';
 
 const OutputElem = ({
   data,

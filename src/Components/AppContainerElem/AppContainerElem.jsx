@@ -12,14 +12,14 @@ import {
   ListItem,
   ListItemIcon,
 	ListItemText,
-	Typography
+  Typography,
+  Icon
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import Icon from '@material-ui/core/Icon';
 import NavBarElem from '../NavBarElem';
 
 const drawerWidth = 240;
@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    // padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -123,7 +123,7 @@ export default function PersistentDrawerLeft({
         <Divider />
         <List>
           {menu.MenuSideBarSup.map((item, index) => (
-            <Link to={item.link}>
+            <Link to={item.link} style={{ textDecoration: 'none' }}>
 							<ListItem button key={index}>
 								<ListItemIcon><Icon>{item.icon}</Icon></ListItemIcon>
 								<ListItemText primary={item.text} />
@@ -134,7 +134,7 @@ export default function PersistentDrawerLeft({
         <Divider />
         <List>
           {menu.MenuSideBarInf.map((item, index) => (
-            <a href={item.link}>
+            <a href={item.href} target='_blank' style={{ textDecoration: 'none' }}>
 							<ListItem button key={index}>
 								<ListItemIcon><Icon>{item.icon}</Icon></ListItemIcon>
 								<ListItemText primary={item.text} />

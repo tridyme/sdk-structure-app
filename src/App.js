@@ -15,13 +15,14 @@ import Page1 from './Views/Page1/';
 
 const Menu = {
   MenuNavBar: [
-    { text: "", link: "", icon: "" }
+    { text: "", link: "", href: "", icon: "" }
   ],
   MenuSideBarSup: [
-    { text: "Home", link: "/home", icon: "dashboard" },
+    { text: "Home", link: "/home", href: "", icon: "dashboard" },
+    { text: "Page 1", link: "/page1", href: "", icon: "spam" }
   ],
   MenuSideBarInf: [
-    { text: "Page 1", link: "/page1", icon: "spam" }
+    { text: "Documentation", link: "", href: "https://www.tridyme.com/fr/documentation/fr/developpers/tridyme-webapp-kit-serverless", icon: "chrome_reader_mode" }
   ]
 };
 
@@ -58,8 +59,9 @@ const App = () => {
           menu={Menu}
         >
           <Switch>
-            <Route path="/home" component={MyApp} />
-            <Route path="/page1" component={Page1} />
+            <Route exact path="/" component={MyApp} />
+            <Route exact path="/home" component={MyApp} />
+            <Route exact path="/page1" component={Page1} />
           </Switch>
         </AppContainerElem>
       </Router>

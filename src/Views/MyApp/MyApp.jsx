@@ -13,8 +13,8 @@ import {
   Typography
 } from '@material-ui/core';
 
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import PollIcon from '@material-ui/icons/Poll';
 import Inputs from './Inputs';
 import Outputs from './Outputs';
 
@@ -107,8 +107,8 @@ function MyApp(props) {
           variant="fullWidth"
           showLabels
         >
-          <BottomNavigationAction label="Inputs"  {...a11yProps(0)} icon={<RestoreIcon />} />
-          <BottomNavigationAction label="Outputs" {...a11yProps(1)} icon={<FavoriteIcon />} />
+          <BottomNavigationAction label="Inputs"  {...a11yProps(0)} icon={<ListAltIcon />} />
+          <BottomNavigationAction label="Outputs" {...a11yProps(1)} icon={<PollIcon />} />
         </BottomNavigation>
       </AppBar>
     </div>

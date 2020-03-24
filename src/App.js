@@ -12,6 +12,7 @@ import AppContainerElem from './Components/AppContainerElem';
 
 import MyApp from './Views/MyApp/';
 import Page1 from './Views/Page1/';
+import Camera from './Views/Camera/';
 
 const Menu = {
   MenuNavBar: [
@@ -19,7 +20,8 @@ const Menu = {
   ],
   MenuSideBarSup: [
     { text: "Home", link: "/home", href: "", icon: "dashboard" },
-    { text: "Page 1", link: "/page1", href: "", icon: "spam" }
+    { text: "3D Render", link: "/page1", href: "", icon: "spam" },
+    { text: "Camera", link: "/camera", href: "", icon: "camera" }
   ],
   MenuSideBarInf: [
     { text: "Documentation", link: "", href: "https://www.tridyme.com/fr/documentation/fr/developpers/tridyme-webapp-kit-serverless", icon: "chrome_reader_mode" }
@@ -62,6 +64,7 @@ const App = () => {
             <Route exact path="/" component={MyApp} />
             <Route exact path="/home" component={MyApp} />
             <Route exact path="/page1" component={Page1} />
+            <Route exact path="/camera" component={Camera} />
           </Switch>
         </AppContainerElem>
       </Router>

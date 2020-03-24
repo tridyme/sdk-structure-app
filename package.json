@@ -5,6 +5,8 @@
   "dependencies": {
     "@material-ui/core": "^4.9.7",
     "@material-ui/icons": "^4.9.1",
+    "@tensorflow-models/coco-ssd": "^2.0.1",
+    "@tensorflow/tfjs": "^1.7.0",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
     "clsx": "^1.1.0",

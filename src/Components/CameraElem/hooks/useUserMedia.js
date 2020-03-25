@@ -9,7 +9,7 @@ export function useUserMedia(requestedMedia) {
         const stream = await navigator.mediaDevices.getUserMedia(requestedMedia);
         setMediaStream(stream);
       } catch(err) {
-        // Removed for brevity
+        // alert('No Camera');
       }
     }
 

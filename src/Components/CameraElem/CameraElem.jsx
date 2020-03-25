@@ -53,7 +53,7 @@ export function CameraElem({ onCapture, onClear }) {
     }
 
     if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
-      useModel(mediaStream);
+      useModel(videoRef.current);
     }
 
   });

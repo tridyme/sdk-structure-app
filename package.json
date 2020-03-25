@@ -20,11 +20,13 @@
     "react-dom": "^16.8.6",
     "react-icons": "^3.5.0",
     "react-markdown": "^4.2.2",
+    "react-measure": "^2.3.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "2.1.8",
     "react-swipeable-views": "^0.13.9",
     "react-three-fiber": "^4.0.22",
     "reactstrap": "^7.1.0",
+    "styled-components": "^5.0.1",
     "three": "^0.114.0"
   },
   "devDependencies": {

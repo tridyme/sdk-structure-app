@@ -31,6 +31,17 @@ export const Canvas = styled.canvas`
   left: 0;
 `;
 
+
+export const Box = styled.canvas`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  bottom: 20px;
+  left: 20px;
+  border: 1px solid #00ffff;
+`;
+
+
 export const Video = styled.video`
   position: absolute;
 

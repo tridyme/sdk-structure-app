@@ -1,11 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Measure from "react-measure";
+import "@tensorflow/tfjs";
+import * as cocoSsd from "@tensorflow-models/coco-ssd";
 import { useUserMedia } from "./hooks/useUserMedia";
 import { useCardRatio } from "./hooks/useCardRatio";
 import { useOffsets } from "./hooks/useOffsets";
 import {
   Video,
   Canvas,
+  Box,
   Wrapper,
   Container,
   Flash,
@@ -15,10 +18,12 @@ import {
 
 const CAPTURE_OPTIONS = {
   audio: false,
-  video: { facingMode: "environment" }
+  video: { facingMode: "environment" },
+  model: cocoSsd.load()
 };
 
 export function CameraElem({ onCapture, onClear }) {
+  const boxRef = useRef();
   const canvasRef = useRef();
   const videoRef = useRef();
 
@@ -28,7 +33,8 @@ export function CameraElem({ onCapture, onClear }) {
   const [isFlashing, setIsFlashing] = useState(false);
 
   const mediaStream = useUserMedia(CAPTURE_OPTIONS);
-  const [aspectRatio, calculateRatio] = useCardRatio(1.586);
+  const [aspectRatio, calculateRatio] = useCardRatio(1.586);  
+  
   const offsets = useOffsets(
     videoRef.current && videoRef.current.videoWidth,
     videoRef.current && videoRef.current.videoHeight,
@@ -39,6 +45,59 @@ export function CameraElem({ onCapture, onClear }) {
   if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
     videoRef.current.srcObject = mediaStream;
   }
+
+  useEffect(() => {
+    const useModel = async (video) => {
+      const model = await cocoSsd.load();
+      detectFrame(video, model);
+    }
+
+    if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
+      useModel(mediaStream);
+    }
+
+  });
+
+  const detectFrame = (video, model) => {
+    model.detect(video).then(predictions => {
+      renderPredictions(predictions);
+      requestAnimationFrame(() => {
+        detectFrame(video, model);
+      });
+    });
+  };
+
+  const renderPredictions = (predictions) => {
+    const ctx = boxRef.current.getContext("2d");
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    // Font options.
+    const font = "16px sans-serif";
+    ctx.font = font;
+    ctx.textBaseline = "top";
+    predictions.forEach(prediction => {
+      const x = prediction.bbox[0];
+      const y = prediction.bbox[1];
+      const width = prediction.bbox[2];
+      const height = prediction.bbox[3];
+      // Draw the bounding box.
+      ctx.strokeStyle = "#00FFFF";
+      ctx.lineWidth = 4;
+      ctx.strokeRect(x, y, width, height);
+      // Draw the label background.
+      ctx.fillStyle = "#00FFFF";
+      const textWidth = ctx.measureText(prediction.class).width;
+      const textHeight = parseInt(font, 10); // base 10
+      ctx.fillRect(x, y, textWidth + 4, textHeight + 4);
+    });
+
+    predictions.forEach(prediction => {
+      const x = prediction.bbox[0];
+      const y = prediction.bbox[1];
+      // Draw the text last to ensure it's on top.
+      ctx.fillStyle = "#000000";
+      ctx.fillText(prediction.class, x, y);
+    });
+  };
 
   function handleResize(contentRect) {
     setContainer({
@@ -115,6 +174,12 @@ export function CameraElem({ onCapture, onClear }) {
               ref={canvasRef}
               width={container.width}
               height={container.height}
+            />
+
+            <Box
+              ref={boxRef}
+              width="600"
+              height="500"
             />
 
             <Flash

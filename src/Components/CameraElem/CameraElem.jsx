@@ -46,17 +46,6 @@ export function CameraElem({ onCapture, onClear }) {
     videoRef.current.srcObject = mediaStream;
   }
 
-  useEffect(() => {
-    const useModel = async (video) => {
-      const model = await cocoSsd.load();
-      detectFrame(video, model);
-    }
-
-    if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
-      useModel(videoRef.current);
-    }
-
-  });
 
   const detectFrame = (video, model) => {
     model.detect(video).then(predictions => {
@@ -106,10 +95,13 @@ export function CameraElem({ onCapture, onClear }) {
     });
   }
 
-  function handleCanPlay() {
+  async function handleCanPlay() {
     calculateRatio(videoRef.current.videoHeight, videoRef.current.videoWidth);
     setIsVideoPlaying(true);
     videoRef.current.play();
+
+    const model = await cocoSsd.load();
+    detectFrame(videoRef.current, model);
   }
 
   function handleCapture() {
@@ -178,8 +170,8 @@ export function CameraElem({ onCapture, onClear }) {
 
             <Box
               ref={boxRef}
-              width="600"
-              height="500"
+              width="20"
+              height="20"
             />
 
             <Flash

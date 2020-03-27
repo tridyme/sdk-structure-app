@@ -14,7 +14,9 @@ import "@tensorflow/tfjs";
 import * as cocoSsd from "@tensorflow-models/coco-ssd";
 import { CameraElem } from "../../Components/CameraElem";
 import { Root, Preview, Footer, GlobalStyle } from "./styles";
-
+import {
+  Button
+} from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -49,15 +51,17 @@ export default function Camera() {
         )}
 
         <Footer>
-          <button onClick={() => setIsCameraOpen(true)}>Open Camera</button>
-          <button
+          <Button variant="contained" color="primary" onClick={() => setIsCameraOpen(true)}>Open Camera</Button>
+          <Button
+            variant="contained"
+            color="primary"
             onClick={() => {
               setIsCameraOpen(false);
               setCardImage(undefined);
             }}
           >
             Close Camera
-          </button>
+          </Button>
         </Footer>
       </Root>
       <GlobalStyle />

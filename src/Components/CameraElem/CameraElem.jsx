@@ -5,6 +5,7 @@ import * as cocoSsd from "@tensorflow-models/coco-ssd";
 import { useUserMedia } from "./hooks/useUserMedia";
 import { useCardRatio } from "./hooks/useCardRatio";
 import { useOffsets } from "./hooks/useOffsets";
+import { useModelPredictions } from "./hooks/useModelPredictions";
 import {
   Video,
   Canvas,
@@ -18,43 +19,39 @@ import {
 
 const CAPTURE_OPTIONS = {
   audio: false,
-  video: { facingMode: "environment" },
-  model: cocoSsd.load()
+  video: { facingMode: "user" }
 };
 
 export function CameraElem({ onCapture, onClear }) {
   const boxRef = useRef();
   const canvasRef = useRef();
   const videoRef = useRef();
+  const modelRef = React.useRef(null);
+  const predictionsRef = React.useRef(null);
+  const requestRef = React.useRef(null);
 
   const [container, setContainer] = useState({ width: 0, height: 0 });
+  const [boxContainer, setBoxContainer] = useState({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0
+  });
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isCanvasEmpty, setIsCanvasEmpty] = useState(true);
   const [isFlashing, setIsFlashing] = useState(false);
+  const [ready, setReady] = React.useState(false);
 
-  const mediaStream = useUserMedia(CAPTURE_OPTIONS);
-  const [aspectRatio, calculateRatio] = useCardRatio(1.586);  
   
-  const offsets = useOffsets(
-    videoRef.current && videoRef.current.videoWidth,
-    videoRef.current && videoRef.current.videoHeight,
-    container.width,
-    container.height
-  );
 
-  if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
-    videoRef.current.srcObject = mediaStream;
-  }
-
-
-  const detectFrame = (video, model) => {
-    model.detect(video).then(predictions => {
-      renderPredictions(predictions);
-      requestAnimationFrame(() => {
-        detectFrame(video, model);
-      });
-    });
-  };
+  // const detectFrame = (video, model) => {
+  //   model.detect(video).then(predictions => {
+  //     renderPredictions(predictions);
+  //     requestAnimationFrame(() => {
+  //       detectFrame(video, model);
+  //     });
+  //   });
+  // };
 
   const renderPredictions = (predictions) => {
     const ctx = boxRef.current.getContext("2d");
@@ -64,13 +61,20 @@ export function CameraElem({ onCapture, onClear }) {
     ctx.font = font;
     ctx.textBaseline = "top";
     predictions.forEach(prediction => {
+      console.log('BOOOX', prediction.bbox[0])
+      setBoxContainer({
+        x: prediction.bbox[0],
+        y: prediction.bbox[1],
+        width: prediction.bbox[2],
+        height: prediction.bbox[3]
+      })
       const x = prediction.bbox[0];
       const y = prediction.bbox[1];
       const width = prediction.bbox[2];
       const height = prediction.bbox[3];
       // Draw the bounding box.
       ctx.strokeStyle = "#00FFFF";
-      ctx.lineWidth = 4;
+      ctx.lineWidth = 2;
       ctx.strokeRect(x, y, width, height);
       // Draw the label background.
       ctx.fillStyle = "#00FFFF";
@@ -87,6 +91,49 @@ export function CameraElem({ onCapture, onClear }) {
       ctx.fillText(prediction.class, x, y);
     });
   };
+  
+  
+  
+  const mediaStream = useUserMedia(CAPTURE_OPTIONS);
+  const [aspectRatio, calculateRatio] = useCardRatio(1.586);  
+  
+  const offsets = useOffsets(
+    videoRef.current && videoRef.current.videoWidth,
+    videoRef.current && videoRef.current.videoHeight,
+    container.width,
+    container.height
+  );
+
+  if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
+    videoRef.current.srcObject = mediaStream;
+  }
+
+
+  const capture = React.useCallback(async () => {
+    if (videoRef.current && modelRef.current) {
+      const predictions = await modelRef.current.detect(videoRef.current);
+      if (predictions) {
+        console.log(predictions)
+        predictionsRef.current = predictions;
+        renderPredictions(predictions);
+      }
+
+      if (!ready) {
+        setReady(true);
+      }
+    }
+
+    requestRef.current = requestAnimationFrame(capture);
+  }, [videoRef]);
+
+  React.useEffect(() => {
+    const load = async () => {
+      modelRef.current = await cocoSsd.load();
+      console.log('LOAD')
+    };
+
+    load();
+  }, [capture]);
 
   function handleResize(contentRect) {
     setContainer({
@@ -99,9 +146,6 @@ export function CameraElem({ onCapture, onClear }) {
     calculateRatio(videoRef.current.videoHeight, videoRef.current.videoWidth);
     setIsVideoPlaying(true);
     videoRef.current.play();
-
-    const model = await cocoSsd.load();
-    detectFrame(videoRef.current, model);
   }
 
   function handleCapture() {
@@ -170,8 +214,12 @@ export function CameraElem({ onCapture, onClear }) {
 
             <Box
               ref={boxRef}
-              width="20"
-              height="20"
+              style={{
+                top: 0,
+                left: 0
+              }}
+              width={container.width}
+              height={container.height}
             />
 
             <Flash
@@ -181,7 +229,12 @@ export function CameraElem({ onCapture, onClear }) {
           </Container>
 
           {isVideoPlaying && (
-            <Button onClick={isCanvasEmpty ? handleCapture : handleClear}>
+            <Button
+              onClick={() => {
+                requestRef.current = requestAnimationFrame(capture);
+              }}
+              //onClick={isCanvasEmpty ? handleCapture : handleClear}>
+            >
               {isCanvasEmpty ? "Take a picture" : "Take another picture"}
             </Button>
           )}

@@ -7,6 +7,9 @@ import { useCardRatio } from "./hooks/useCardRatio";
 import { useOffsets } from "./hooks/useOffsets";
 import { useModelPredictions } from "./hooks/useModelPredictions";
 import {
+  Button
+} from '@material-ui/core';
+import {
   Video,
   Canvas,
   Box,
@@ -14,7 +17,7 @@ import {
   Container,
   Flash,
   Overlay,
-  Button
+  Footer
 } from "./styles";
 
 const CAPTURE_OPTIONS = {
@@ -22,7 +25,13 @@ const CAPTURE_OPTIONS = {
   video: { facingMode: "user" }
 };
 
-export function CameraElem({ onCapture, onClear }) {
+export function CameraElem({ 
+  onCapture,
+  onClear,
+  facingMode,
+  setFacingMode,
+  captureOptions
+}) {
   const boxRef = useRef();
   const canvasRef = useRef();
   const videoRef = useRef();
@@ -39,35 +48,26 @@ export function CameraElem({ onCapture, onClear }) {
   });
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isCanvasEmpty, setIsCanvasEmpty] = useState(true);
+  const [isObjectDetection, setIsObjectDetection] = useState(true);
+  const [isModelLoading, setIsModelLoading] = useState(false);
   const [isFlashing, setIsFlashing] = useState(false);
   const [ready, setReady] = React.useState(false);
 
-  
-
-  // const detectFrame = (video, model) => {
-  //   model.detect(video).then(predictions => {
-  //     renderPredictions(predictions);
-  //     requestAnimationFrame(() => {
-  //       detectFrame(video, model);
-  //     });
-  //   });
-  // };
-
   const renderPredictions = (predictions) => {
-    const ctx = boxRef.current.getContext("2d");
+    const ctx = canvasRef.current.getContext("2d");
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     // Font options.
     const font = "16px sans-serif";
     ctx.font = font;
     ctx.textBaseline = "top";
     predictions.forEach(prediction => {
-      console.log('BOOOX', prediction.bbox[0])
-      setBoxContainer({
-        x: prediction.bbox[0],
-        y: prediction.bbox[1],
-        width: prediction.bbox[2],
-        height: prediction.bbox[3]
-      })
+      // console.log('BOOOX', prediction.bbox[0])
+      // setBoxContainer({
+      //   x: prediction.bbox[0],
+      //   y: prediction.bbox[1],
+      //   width: prediction.bbox[2],
+      //   height: prediction.bbox[3]
+      // })
       const x = prediction.bbox[0];
       const y = prediction.bbox[1];
       const width = prediction.bbox[2];
@@ -92,9 +92,7 @@ export function CameraElem({ onCapture, onClear }) {
     });
   };
   
-  
-  
-  const mediaStream = useUserMedia(CAPTURE_OPTIONS);
+  const mediaStream = useUserMedia(captureOptions);
   const [aspectRatio, calculateRatio] = useCardRatio(1.586);  
   
   const offsets = useOffsets(
@@ -113,23 +111,19 @@ export function CameraElem({ onCapture, onClear }) {
     if (videoRef.current && modelRef.current) {
       const predictions = await modelRef.current.detect(videoRef.current);
       if (predictions) {
-        console.log(predictions)
+        // console.log(predictions)
         predictionsRef.current = predictions;
         renderPredictions(predictions);
       }
 
-      if (!ready) {
-        setReady(true);
-      }
     }
-
+  
     requestRef.current = requestAnimationFrame(capture);
   }, [videoRef]);
 
   React.useEffect(() => {
     const load = async () => {
       modelRef.current = await cocoSsd.load();
-      console.log('LOAD')
     };
 
     load();
@@ -174,6 +168,19 @@ export function CameraElem({ onCapture, onClear }) {
     setIsCanvasEmpty(true);
     onClear();
   }
+
+  function handleObjectDetection() {
+    // setIsObjectDetection(!isObjectDetection);
+    requestRef.current = requestAnimationFrame(capture);
+  }
+
+  // async function handleSwitchFacingMode() {
+  //   if(facingMode==="user") {
+  //     setFacingMode("environment");
+  //   } else {
+  //     setFacingMode("user");
+  //   }
+  // }
 
   if (!mediaStream) {
     return null;
@@ -229,14 +236,29 @@ export function CameraElem({ onCapture, onClear }) {
           </Container>
 
           {isVideoPlaying && (
-            <Button
-              onClick={() => {
-                requestRef.current = requestAnimationFrame(capture);
-              }}
-              //onClick={isCanvasEmpty ? handleCapture : handleClear}>
-            >
-              {isCanvasEmpty ? "Take a picture" : "Take another picture"}
-            </Button>
+            <Footer>
+              <Button
+                onClick={isCanvasEmpty ? handleCapture : handleClear}
+                variant="contained"
+                color="primary"
+              >
+                {isCanvasEmpty ? "Take a picture" : "Take another picture"}
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleObjectDetection}
+              >
+                {isObjectDetection ? "Stop Detection" : "Object Detection"}
+              </Button>
+              {/* <Button
+                variant="contained"
+                color="primary"
+                onClick={handleSwitchFacingMode}
+              >
+                {facingMode==="user" ? "User" : "Environment"}
+              </Button> */}
+            </Footer>
           )}
         </Wrapper>
       )}

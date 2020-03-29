@@ -84,3 +84,19 @@ export const Button = styled.button`
   padding: 12px 24px;
   background: silver;
 `;
+
+export const Footer = styled.footer`
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  background: transparent;
+
+  button {
+    margin: 0 10px;
+  }
+`;

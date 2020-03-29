@@ -5,18 +5,16 @@ import {
   BottomNavigation,
   BottomNavigationAction,
   Tabs,
-  Typography
+  Typography,
+  Button
 } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import CardElem from '../../Components/CardElem';
-import ThreeDElem from '../../Components/ThreeDElem';
 import "@tensorflow/tfjs";
 import * as cocoSsd from "@tensorflow-models/coco-ssd";
 import { CameraElem } from "../../Components/CameraElem";
 import { Root, Preview, Footer, GlobalStyle } from "./styles";
-import {
-  Button
-} from '@material-ui/core';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,8 +28,19 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Camera() {
-  const [isCameraOpen, setIsCameraOpen] = useState(false);
+  const [isCameraOpen, setIsCameraOpen] = useState(true);
+  const [facingMode, setFacingMode] = React.useState("user");
   const [cardImage, setCardImage] = useState();
+  const [isCameraLoading, setIsCameraLoading] = useState(true);
+
+  const captureOptions = {
+    audio: false,
+    video: { facingMode: facingMode }
+  };
+
+  // React.useEffect(() => {
+  //   setIsCameraLoading(false);
+  // }, []);
 
   return (
     <Fragment>
@@ -40,6 +49,9 @@ export default function Camera() {
           <CameraElem
             onCapture={blob => setCardImage(blob)}
             onClear={() => setCardImage(undefined)}
+            facingMode={facingMode}
+            setFacingMode={setFacingMode}
+            captureOptions={captureOptions}
           />
         )}
 
@@ -50,7 +62,7 @@ export default function Camera() {
           </div>
         )}
 
-        <Footer>
+        {/* <Footer>
           <Button variant="contained" color="primary" onClick={() => setIsCameraOpen(true)}>Open Camera</Button>
           <Button
             variant="contained"
@@ -62,7 +74,7 @@ export default function Camera() {
           >
             Close Camera
           </Button>
-        </Footer>
+        </Footer> */}
       </Root>
       <GlobalStyle />
     </Fragment>

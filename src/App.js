@@ -14,6 +14,7 @@ import MyApp from './Views/MyApp/';
 import Page1 from './Views/Page1/';
 import Camera from './Views/Camera/';
 import Hand from './Views/Hand/';
+import ObjectDetection from './Views/ObjectDetection/';
 
 const Menu = {
   MenuNavBar: [
@@ -23,7 +24,8 @@ const Menu = {
     { text: "Home", link: "/home", href: "", icon: "dashboard" },
     { text: "3D Render", link: "/page1", href: "", icon: "spam" },
     { text: "Camera", link: "/camera", href: "", icon: "camera" },
-    { text: "Hand", link: "/hand", href: "", icon: "camera" }
+    { text: "Hand", link: "/hand", href: "", icon: "camera" },
+    { text: "Object Detection", link: "/objectdetection", href: "", icon: "camera" }
   ],
   MenuSideBarInf: [
     { text: "Documentation", link: "", href: "https://www.tridyme.com/fr/documentation/fr/developpers/tridyme-webapp-kit-serverless", icon: "chrome_reader_mode" }
@@ -68,6 +70,7 @@ const App = () => {
             <Route exact path="/page1" component={Page1} />
             <Route exact path="/camera" component={Camera} />
             <Route exact path="/hand" component={Hand} />
+            <Route exact path="/objectdetection" component={ObjectDetection} />
           </Switch>
         </AppContainerElem>
       </Router>

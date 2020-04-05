@@ -35,6 +35,8 @@ export const Canvas = styled.canvas`
 export const Box = styled.canvas`
   position: absolute;
   border: 1px solid #00ffff;
+  top: 0;
+  left: 0;
 `;
 
 

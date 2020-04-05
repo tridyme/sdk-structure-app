@@ -5,7 +5,10 @@ import * as cocoSsd from "@tensorflow-models/coco-ssd";
 import { useUserMedia } from "./hooks/useUserMedia";
 import { useCardRatio } from "./hooks/useCardRatio";
 import { useOffsets } from "./hooks/useOffsets";
-import { useModelPredictions } from "./hooks/useModelPredictions";
+import { 
+  useModelPredictions,
+  renderPredictions 
+} from "./hooks/useModelPredictions";
 import {
   Button
 } from '@material-ui/core';
@@ -52,45 +55,6 @@ export function CameraElem({
   const [isModelLoading, setIsModelLoading] = useState(false);
   const [isFlashing, setIsFlashing] = useState(false);
   const [ready, setReady] = React.useState(false);
-
-  const renderPredictions = (predictions) => {
-    const ctx = canvasRef.current.getContext("2d");
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    // Font options.
-    const font = "16px sans-serif";
-    ctx.font = font;
-    ctx.textBaseline = "top";
-    predictions.forEach(prediction => {
-      // console.log('BOOOX', prediction.bbox[0])
-      // setBoxContainer({
-      //   x: prediction.bbox[0],
-      //   y: prediction.bbox[1],
-      //   width: prediction.bbox[2],
-      //   height: prediction.bbox[3]
-      // })
-      const x = prediction.bbox[0];
-      const y = prediction.bbox[1];
-      const width = prediction.bbox[2];
-      const height = prediction.bbox[3];
-      // Draw the bounding box.
-      ctx.strokeStyle = "#00FFFF";
-      ctx.lineWidth = 2;
-      ctx.strokeRect(x, y, width, height);
-      // Draw the label background.
-      ctx.fillStyle = "#00FFFF";
-      const textWidth = ctx.measureText(prediction.class).width;
-      const textHeight = parseInt(font, 10); // base 10
-      ctx.fillRect(x, y, textWidth + 4, textHeight + 4);
-    });
-
-    predictions.forEach(prediction => {
-      const x = prediction.bbox[0];
-      const y = prediction.bbox[1];
-      // Draw the text last to ensure it's on top.
-      ctx.fillStyle = "#000000";
-      ctx.fillText(prediction.class, x, y);
-    });
-  };
   
   const mediaStream = useUserMedia(captureOptions);
   const [aspectRatio, calculateRatio] = useCardRatio(1.586);  
@@ -113,13 +77,13 @@ export function CameraElem({
       if (predictions) {
         // console.log(predictions)
         predictionsRef.current = predictions;
-        renderPredictions(predictions);
+        renderPredictions(predictions, boxRef, offsets);
       }
 
     }
   
     requestRef.current = requestAnimationFrame(capture);
-  }, [videoRef]);
+  }, [videoRef, offsets]);
 
   React.useEffect(() => {
     const load = async () => {
@@ -221,10 +185,6 @@ export function CameraElem({
 
             <Box
               ref={boxRef}
-              style={{
-                top: 0,
-                left: 0
-              }}
               width={container.width}
               height={container.height}
             />

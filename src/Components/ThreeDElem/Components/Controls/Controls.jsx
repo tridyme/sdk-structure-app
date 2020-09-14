@@ -15,11 +15,15 @@ function Controls() {
       ref={controlsRef}
       args={[camera, gl.domElement]}
       enableRotate
-      enablePan={false}
+      enablePan={true}
       maxDistance={100}
       minDistance={0}
-      minPolarAngle={Math.PI / 6}
-      maxPolarAngle={Math.PI / 2}
+      maxAzimuthAngle={Math.PI / 4}
+      maxPolarAngle={Math.PI}
+      minAzimuthAngle={-Math.PI / 4}
+      minPolarAngle={0}
+      /*minPolarAngle={Math.PI / 6}
+      maxPolarAngle={Math.PI / 2}*/
     />
   );
 }

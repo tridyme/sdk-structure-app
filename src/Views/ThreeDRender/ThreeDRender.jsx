@@ -10,6 +10,7 @@ import {
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import CardElem from '../../Components/CardElem';
 import ThreeDElem from '../../Components/ThreeDElem';
+import Box from '../../Components/ThreeDElem/Components/Elements/Box';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const Page1 = () => {
+const ThreeDRender = () => {
   const classes = useStyles();
 
   return (
@@ -32,10 +33,16 @@ const Page1 = () => {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <CardElem
-            title="My Inputs"
-            subtitle="Section dimensions"
+            title="My 3D Scene"
+            subtitle="Structure"
           >
-            <ThreeDElem />
+            <ThreeDElem
+              Children={
+                <React.Fragment>
+                  <Box position={[-1.2, 0, 0]} />
+                </React.Fragment>
+              }
+            />
           </CardElem>
         </Grid>
       </Grid>
@@ -43,4 +50,4 @@ const Page1 = () => {
   );
 }
 
-export default Page1;
+export default ThreeDRender;

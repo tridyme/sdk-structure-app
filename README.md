@@ -11,6 +11,7 @@
 - [Ajouter des fonctionnalités](#add-features)
 - [Les composants](#components)
 - [Modification et ajout de composant](#modify-add-components)
+- [Déployer son code sur GitHub](#github)
 - [Mettre son application en ligne](#online-webapp)
 - [License](#license)
 
@@ -61,10 +62,10 @@ Pour l'installer: <a href="https://code.visualstudio.com/Download" target="_blan
 
 ### Clone triazur-webapp-kit-serverless
 
-Afin de créer notre première application, commençons par cloner <a href="https://gitlab.com/triazur/triazur-webapp-kit-serverless.git" target="_blank">**triazur-webapp-kit-serverless**</a> grâce à **git** dans le repertoire ou nous souhaitons :
+Afin de créer notre première application, commençons par cloner <a href="https://github.com/tridyme/webapp-kit-serverless.git" target="_blank">webapp-kit-serverless</a> grâce à **git** dans le repertoire ou nous souhaitons :
 ```shell
-$ git clone https://gitlab.com/triazur/triazur-webapp-kit-serverless.git
-Cloning into 'triazur-webapp-kit-serverless'...
+$ git clone https://github.com/tridyme/webapp-kit-serverless.git
+Cloning into 'webapp-kit-serverless'...
 remote: Enumerating objects: 91, done.
 remote: Counting objects: 100% (91/91), done.
 remote: Compressing objects: 100% (76/76), done.
@@ -72,11 +73,11 @@ remote: Total 91 (delta 13), reused 0 (delta 0)
 Unpacking objects: 100% (91/91), done.
 ```
 
-![triazur web app](http://g.recordit.co/zkvt46c4Bd.gif)
+![tridyme web app](http://g.recordit.co/zkvt46c4Bd.gif)
 
 ### Démarrage
 
-Une fois le clonage finalisé, vous pouvez renommer le dossier **triazur-webapp-kit-serverless** comme vous le souhaitez, ici nous l'appelerons **my-first-app**:
+Une fois le clonage finalisé, vous pouvez renommer le dossier **webapp-kit-serverless** comme vous le souhaitez, ici nous l'appelerons **my-first-app**:
 
 
 Puis, entrez dans votre dossier, lancez l'installation des modules **Node.js** via la commande `npm install` et enfin démarrez l'application avec `npm start`:
@@ -279,13 +280,45 @@ Exemple:
 
 ## <a name="modify-add-components"></a>Modification et ajout de composant
 
-les composants éxistants de <a href="https://gitlab.com/triazur/triazur-webapp-kit-serverless.git" target="_blank">**triazur-webapp-kit-serverless**</a> sont écrits en <a href="https://fr.reactjs.org/" target="_blank">**React.js**</a>, ils sont donc entièrement modifiables.
+les composants éxistants de <a href="https://github.com/tridyme/webapp-kit-serverless.git" target="_blank">webapp-kit-serverless</a> sont écrits en <a href="https://fr.reactjs.org/" target="_blank">**React.js**</a>, ils sont donc entièrement modifiables.
 
 Il est également possible de rajouter des composants. Pour plus d'information, voir les tutoriels suivants:
 - Pour **React.js** sur Openclassrooms: <a href="https://openclassrooms.com/fr/courses/4664381-realisez-une-application-web-avec-react-js" target="_blank">Réalisez une application web avec React.js</a>
 - **React.js** est basé lui-même sur **Javascript** qui est le language permettant de faire des calculs dans le navigateur web, pour plus d'information, voir le tutoriel d'Openclassrooms: <a href="https://openclassrooms.com/fr/courses/1916641-dynamisez-vos-sites-web-avec-javascript" target="_blank">Dynamisez vos sites web avec JavaScript</a>
 
-## <a name="online-webapp"></a>Mettre son application en ligne
+## <a name="github"></a>Déployer son code sur GitHub
+
+Une fois, les modifications implémentées, vous pouvez déployer votre code sur <a href="https://www.github.com/" target="_blank">**GitHub**</a>. Cela permet:
+- d'enregistrer son code 
+- de travailler à plusieurs dessus
+- et, nous le verrons ci-dessous, de le mettre en ligne
+
+
+
+## <a name="online-webapp"></a>Mettre son application en ligne avec Netlify
+
+Afin de mettre son application en ligne, nous allons utiliser <a href="https://www.netlify.com/" target="_blank">**Netlify**</a> qui permet de dépoyer des applications de manière gratuite.
+
+Pour cela, il faut d'abord:
+- Créer un compte Heroku: <a href="https://signup.heroku.com/login" target="_blank">https://signup.heroku.com/login</a>
+- Puis installer Heroku: <a href="https://devcenter.heroku.com/articles/heroku-cli#download-and-install" target="_blank">https://devcenter.heroku.com/articles/heroku-cli#download-and-install</a>
+
+
+Puis utiliser **Git** pour deployer l'application sur <a href="https://www.heroku.com/" target="_blank">**Heroku**</a>:
+
+```shell
+$ git add .
+$ git commit -m "Added a Procfile."
+$ git push heroku master
+#   Heroku credentials
+$ heroku create
+$ git push heroku master
+#   Launching... done
+#      http://example.herokuapp.com deployed to Heroku
+```
+
+Votre application devrait être disponible sur **http://example.herokuapp.com**.
+
 
 Afin de mettre son application en ligne, nous allons utiliser <a href="https://www.heroku.com/" target="_blank">**Heroku**</a> qui permet de dépoyer des applications de manière gratuite.
 

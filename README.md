@@ -1,8 +1,8 @@
 ## Créer mon application
 
-> Afin de permettre aux ingénieurs de pouvoir développer leurs propres applications en ligne, TriAzur met à disposition le kit de développement <a href="https://gitlab.com/triazur/triazur-webapp-kit-serverless.git" target="_blank">triazur-webapp-kit-serverless</a>.
+> Afin de permettre aux ingénieurs de pouvoir développer leurs propres applications en ligne, <a href="https://www.tridyme.com/fr/" target="_blank">TriDyme</a> met à disposition le kit de développement <a href="https://github.com/tridyme/webapp-kit-serverless.git" target="_blank">webapp-kit-serverless</a>.
 
-> Ce projet vous permet de créer et de publier vos propres applications de ligne et de les proposer dans la marketplace de TriAzur.
+> Ce projet vous permet de créer et de publier vos propres applications de ligne et de les proposer dans la marketplace de <a href="https://www.tridyme.com/fr/" target="_blank">TriDyme</a> gratuitement.
 
 ## Sommaire (Optional)
 
@@ -23,7 +23,7 @@ Les prérequis suivants doivent être installé:
 
 ### <a name="nodejs"></a>Node.js
 
-<a href="https://gitlab.com/triazur/triazur-webapp-kit-serverless.git" target="_blank">**triazur-webapp-kit-serverless**</a> est écrit en <a href="https://fr.reactjs.org/" target="_blank">**React.js**</a> qui lui même nécessite <a href="https://nodejs.org/fr/" target="_blank">**Node.js**</a>. **Node.js** est un environnement d'exécution JavaScript installable partout, qui permet d'écrire n'importe quel type de programme en JavaScript : outil en ligne de commande, serveur, application desktop, internet des objets (IoT).
+<a href="https://github.com/tridyme/webapp-kit-serverless.git" target="_blank">**webapp-kit-serverless**</a> est écrit en <a href="https://fr.reactjs.org/" target="_blank">**React.js**</a> qui lui même nécessite <a href="https://nodejs.org/fr/" target="_blank">**Node.js**</a>. **Node.js** est un environnement d'exécution JavaScript installable partout, qui permet d'écrire n'importe quel type de programme en JavaScript : outil en ligne de commande, serveur, application desktop, internet des objets (IoT).
 
 Pour installer Node.js, allez sur <a href="https://nodejs.org/fr/download/" target="_blank">**https://nodejs.org/fr/download/**</a> puis suivez les instructions.
 

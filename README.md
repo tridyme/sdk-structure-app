@@ -293,6 +293,10 @@ Une fois, les modifications implémentées, vous pouvez déployer votre code sur
 - de travailler à plusieurs dessus
 - et, nous le verrons ci-dessous, de le mettre en ligne
 
+Pour cela, il faut d'abord:
+- Créer un compte sur <a href="https://github.com/" target="_blank">GitHub</a>
+
+
 
 
 ## <a name="online-webapp"></a>Mettre son application en ligne avec Netlify
@@ -347,4 +351,4 @@ Votre application devrait être disponible sur **http://example.herokuapp.com**.
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 - **[MIT license](http://opensource.org/licenses/mit-license.php)**
-- Copyright 2019 © <a href="http://triazur.com" target="_blank">TRIAZUR</a>.
+- Copyright 2020 © <a href="http://tridyme.com" target="_blank">TriDyme</a>.

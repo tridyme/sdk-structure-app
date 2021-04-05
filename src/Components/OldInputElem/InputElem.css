@@ -1,0 +1,28 @@
+.inputElem {
+  max-width :350px;
+  margin: 10px;
+}
+
+.inputElem .groupAddon .groupText {
+  width: 50px;
+  background-color: transparent;
+  border: 0;
+  overflow: hidden;
+}
+
+.inputElem .groupInfo {
+  background-color: transparent;
+  font-weight: bold;
+  border: 0;
+  overflow: hidden;
+}
+
+.inputElem .inputValue {
+  color: blue;
+  min-width: 3em;
+}
+
+.inputElem .inputUnit {
+  min-width: 3em;
+  max-width: 6em;
+}

@@ -19,6 +19,7 @@ import Inputs from './Inputs';
 import Outputs from './Outputs';
 
 import initialData from './initialData';
+import calculations from './calculations';
 
 const useStyles = makeStyles(theme => ({
   text: {
@@ -50,60 +51,57 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function MyApp(props) {
+function MyNewApp(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
-  // Define result state object
-  const [appData, setAppData] = useState(initialData);
+  const [values, setValues] = useState(initialData);
+  const [tab, setTab] = useState(0);
 
-  const updateValue = (field, name, value) => {
-    const updateAppData = update(appData, {
-      [field]: {
-        [name]: {
-          value: {
-            $set: value
-          }
-        }
-      }
-    });
-    setAppData(updateAppData);
-  }
+  const handleChangeValues = (prop) => (event) => {
+    const newValues = { ...values, [prop]: Number(event.target.value) };
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+    const calculatedValues = calculations.outputs(newValues);
+    //const calculatedValues = new Geotechnic.Foundation.TowerFoundation({ initialState: newValues }).analysis();
+    const updatedValues = {
+      ...newValues,
+      ...calculatedValues
+    }
+    setValues(updatedValues);
+  };
+
+  const handleChangeTab = (event, newTab) => {
+    setTab(newTab);
   };
 
   const handleChangeIndex = index => {
-    setValue(index);
+    setTab(index);
   };
 
   return (
     <div>
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
+        index={tab}
         onChangeIndex={handleChangeIndex}
       >
-        <TabPanel value={value} index={0} dir={theme.direction}>
+        <TabPanel value={tab} index={0} dir={theme.direction}>
           <Inputs
-            inputsData={appData.inputs}
-            updateValue={updateValue}
+            values={values}
+            handleChangeValues={handleChangeValues}
           />
         </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
+        <TabPanel value={tab} index={1} dir={theme.direction}>
           <Outputs
-            outputsData={appData.outputs}
-            inputsData={appData.inputs}
-            updateValue={updateValue}
+            values={values}
+            handleChangeValues={handleChangeValues}
           />
         </TabPanel>
       </SwipeableViews>
 
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <BottomNavigation
-          value={value}
-          onChange={handleChange}
+          value={tab}
+          onChange={handleChangeTab}
           variant="fullWidth"
           showLabels
         >
@@ -115,11 +113,11 @@ function MyApp(props) {
   );
 }
 
-MyApp.propTypes = {
+MyNewApp.propTypes = {
   props: PropTypes.object
 };
 
-export default MyApp;
+export default MyNewApp;
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

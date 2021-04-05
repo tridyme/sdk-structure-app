@@ -9,6 +9,7 @@
     "@tensorflow-models/facemesh": "0.0.1",
     "@tensorflow-models/handpose": "0.0.3",
     "@tensorflow/tfjs": "^1.7.0",
+    "@tridyme/aec": "0.0.15",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
     "clsx": "^1.1.0",

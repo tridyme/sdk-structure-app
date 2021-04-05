@@ -1,3 +1,7 @@
+import {
+  SectionGeometry
+} from '@tridyme/aec';
+
 const calculations = {
   // OUTPUTS
   outputs: (inputs) => {
@@ -12,7 +16,8 @@ const calculations = {
       b,
       h
     } = inputs;
-    return b * h;
+    const surface = new SectionGeometry.RectangularSection({ b, h }).A;
+    return surface;
   },
 
   Ixx: (inputs) => {

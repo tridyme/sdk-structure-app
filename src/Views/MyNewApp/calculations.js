@@ -1,5 +1,6 @@
 import {
-  SectionGeometry
+  SectionGeometry,
+  SteelCalculation
 } from '@tridyme/aec';
 
 const calculations = {
@@ -26,6 +27,10 @@ const calculations = {
       h
     } = inputs;
     return b * h ** 3 / 12;
+  },
+
+  Csgrais: (inputs) => {
+    return new SteelCalculation.Eurocode3.TensionChordSplice(inputs).analysis().Csgrais;
   }
 }
 

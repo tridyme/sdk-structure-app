@@ -1,7 +1,3 @@
-import {
-  SectionGeometry,
-  SteelCalculation
-} from '@tridyme/aec';
 
 const calculations = {
   // OUTPUTS
@@ -17,8 +13,7 @@ const calculations = {
       b,
       h
     } = inputs;
-    const surface = new SectionGeometry.RectangularSection({ b, h }).A;
-    return surface;
+    return b * h;
   },
 
   Ixx: (inputs) => {
@@ -27,10 +22,6 @@ const calculations = {
       h
     } = inputs;
     return b * h ** 3 / 12;
-  },
-
-  Csgrais: (inputs) => {
-    return new SteelCalculation.Eurocode3.TensionChordSplice(inputs).analysis().Csgrais;
   }
 }
 

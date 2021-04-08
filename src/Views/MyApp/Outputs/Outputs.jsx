@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import OutputElem from '../../../Components/OutputElem';
+import InputElem from '../../../Components/InputElem';
 import TableElem from '../../../Components/TableElem';
 import CardElem from '../../../Components/CardElem';
-import calculationFunctions from '../Calculations/calculations';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,8 +18,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Outputs = ({
-  inputsData,
-  outputsData
+  values,
+  handleChangeValues
 }) => {
   const classes = useStyles();
 
@@ -32,18 +31,20 @@ const Outputs = ({
             title="My Outputs"
             subtitle="Section characteristics"
           >
-            <div>
-              <OutputElem 
-                data={outputsData.A}
-                inputsData={inputsData}
-                calculationFunctions={calculationFunctions.surfaceRectangle}
-              />
-              <OutputElem 
-                data={outputsData.Ixx}
-                inputsData={inputsData}
-                calculationFunctions={calculationFunctions.inertiaXX}
-              />
-            </div>
+            <InputElem
+              value={values.A}
+              text={'A'}
+              description={'Section:'}
+              unit={'m2'}
+              onChange={handleChangeValues('b')}
+            />
+            <InputElem
+              value={values.Ixx}
+              text={'Ixx'}
+              description={'Inertie:'}
+              unit={'m4'}
+              onChange={handleChangeValues('Ixx')}
+            />
           </CardElem>
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -59,13 +60,13 @@ const Outputs = ({
                     'y(m)'
                   ],
                   rows: [
-                    {x: 0, y: 0},
-                    {x: inputsData.b.value, y: 0},
-                    {x: inputsData.b.value, y: inputsData.h.value},
-                    {x: 0, y: inputsData.h.value},
-                    {x: 0, y: 0}
+                    { x: 0, y: 0 },
+                    { x: values.b, y: 0 },
+                    { x: values.b, y: values.h },
+                    { x: 0, y: values.h },
+                    { x: 0, y: 0 }
                   ],
-                  unit: {x: 'm', y: 'm'}
+                  unit: { x: 'm', y: 'm' }
                 }}
               />
             </div>

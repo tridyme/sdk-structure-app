@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ChartElem from '../../../Components/ChartElem';
-import InputElem from '../../../Components/OldInputElem';
+import InputElem from '../../../Components/InputElem';
 import CardElem from '../../../Components/CardElem';
 
 const useStyles = makeStyles(theme => ({

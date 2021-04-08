@@ -11,7 +11,6 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import AppContainerElem from './Components/AppContainerElem';
 
 import MyApp from './Views/MyApp/';
-import MyNewApp from './Views/MyNewApp/';
 import ThreeDRender from './Views/ThreeDRender/';
 import Camera from './Views/Camera/';
 import Hand from './Views/Hand/';
@@ -66,8 +65,8 @@ const App = () => {
           menu={Menu}
         >
           <Switch>
-            <Route exact path="/" component={MyNewApp} />
-            <Route exact path="/home" component={MyNewApp} />
+            <Route exact path="/" component={MyApp} />
+            <Route exact path="/home" component={MyApp} />
             <Route exact path="/threedrender" component={ThreeDRender} />
             <Route exact path="/camera" component={Camera} />
             <Route exact path="/hand" component={Hand} />

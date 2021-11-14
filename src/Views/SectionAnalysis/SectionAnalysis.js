@@ -5,22 +5,22 @@ import {
 import CardElem from '../../Components/CardElem';
 import InputElem from '../../Components/InputElem';
 import ChartElem from '../../Components/ChartElem';
-
 import calculations from './calculations';
 
 
-function SectionGeometry() {
+function SectionAnalysis() {
   const [values, setValues] = useState({
-    b: 2,
-    h: 3,
-    A: 6,
-    Ixx: 4.5
+    b: 2,         // Inputs: Largeur du rectangle
+    h: 3,         // Inputs: Hauteur du rectangle
+    A: 6,         // Outputs: Surface du rectangle
+    Ixx: 4.5      // Outputs: Inertie du rectangle suivant X
   });
 
   const handleChangeValues = (prop) => (event) => {
     const newValues = { ...values, [prop]: Number(event.target.value) };
 
     const calculatedValues = calculations.outputs(newValues);
+
     const updatedValues = {
       ...newValues,
       ...calculatedValues
@@ -99,5 +99,5 @@ function SectionGeometry() {
   );
 }
 
-export default SectionGeometry;
+export default SectionAnalysis;
 

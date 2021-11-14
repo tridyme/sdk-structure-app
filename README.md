@@ -1,8 +1,8 @@
-## Créer mon application
+## Créer son Application Web
 
-> Afin de permettre aux ingénieurs de pouvoir développer leurs propres applications en ligne, <a href="https://www.tridyme.com/fr/" target="_blank">TriDyme</a> met à disposition le kit de développement <a href="https://github.com/tridyme/webapp-kit-serverless.git" target="_blank">webapp-kit-serverless</a>.
+> Afin de permettre aux ingénieurs de pouvoir développer leurs propres applications en ligne, <a href="https://www.tridyme.com/fr/" target="_blank">TriDyme</a> met à disposition le kit de développement <a href="https://github.com/tridyme/sdk-structure-app" target="_blank">sdk-structure-app</a>.
 
-> Ce projet vous permet de créer et de publier vos propres applications de ligne et de les proposer dans la marketplace de <a href="https://www.tridyme.com/fr/" target="_blank">TriDyme</a> gratuitement.
+> Ce projet a pour objectif à servir de base simple pour permettre de créer et de publier gratuitement ses propres applications web.
 
 ## Sommaire (Optional)
 
@@ -24,7 +24,7 @@ Les prérequis suivants doivent être installé:
 
 ### <a name="nodejs"></a>Node.js
 
-<a href="https://github.com/tridyme/webapp-kit-serverless.git" target="_blank">**webapp-kit-serverless**</a> est écrit en <a href="https://fr.reactjs.org/" target="_blank">**React.js**</a> qui lui même nécessite <a href="https://nodejs.org/fr/" target="_blank">**Node.js**</a>. **Node.js** est un environnement d'exécution JavaScript installable partout, qui permet d'écrire n'importe quel type de programme en JavaScript : outil en ligne de commande, serveur, application desktop, internet des objets (IoT).
+<a href="https://github.com/tridyme/sdk-structure-app" target="_blank">sdk-structure-app</a> est écrit en <a href="https://fr.reactjs.org/" target="_blank">**React.js**</a> qui lui même nécessite <a href="https://nodejs.org/fr/" target="_blank">**Node.js**</a>. **Node.js** est un environnement d'exécution JavaScript installable partout, qui permet d'écrire n'importe quel type de programme en JavaScript : outil en ligne de commande, serveur, application desktop, internet des objets (IoT).
 
 Pour installer Node.js, allez sur <a href="https://nodejs.org/fr/download/" target="_blank">**https://nodejs.org/fr/download/**</a> puis suivez les instructions.
 
@@ -60,12 +60,12 @@ Pour l'installer: <a href="https://code.visualstudio.com/Download" target="_blan
 
 ## <a name="create-my-own-app"></a>Créer notre première application
 
-### Clone triazur-webapp-kit-serverless
+### Cloner le projet
 
-Afin de créer notre première application, commençons par cloner <a href="https://github.com/tridyme/webapp-kit-serverless.git" target="_blank">webapp-kit-serverless</a> grâce à **git** dans le repertoire ou nous souhaitons :
+Afin de créer notre première application, commençons par cloner <a href="https://github.com/tridyme/sdk-structure-app" target="_blank">sdk-structure-app</a> grâce à **git** dans le repertoire ou nous souhaitons :
 ```shell
-$ git clone https://github.com/tridyme/webapp-kit-serverless.git
-Cloning into 'webapp-kit-serverless'...
+$ git clone https://github.com/tridyme/sdk-structure-app.git
+Cloning into 'sdk-structure-app'...
 remote: Enumerating objects: 91, done.
 remote: Counting objects: 100% (91/91), done.
 remote: Compressing objects: 100% (76/76), done.
@@ -73,17 +73,15 @@ remote: Total 91 (delta 13), reused 0 (delta 0)
 Unpacking objects: 100% (91/91), done.
 ```
 
-![tridyme web app](http://g.recordit.co/zkvt46c4Bd.gif)
-
 ### Démarrage
 
-Une fois le clonage finalisé, vous pouvez renommer le dossier **webapp-kit-serverless** comme vous le souhaitez, ici nous l'appelerons **my-first-app**:
+Une fois le clonage finalisé, vous pouvez renommer le dossier **sdk-structure-app** comme vous le souhaitez, ici nous l'appelerons **section-analysis**:
 
 
 Puis, entrez dans votre dossier, lancez l'installation des modules **Node.js** via la commande `npm install` et enfin démarrez l'application avec `npm start`:
 
 ```shell
-$ cd ./my-first-app
+$ cd ./section-analysis
 $ npm install
 $ npm start
 ```
@@ -96,41 +94,42 @@ Cette application permet de calculer la surface d'un rectangle ainsi que son ine
 A présent, nous souhaitons pouvoir également calculer l'inertie du rectangle suivant Y.
 
 Afin de modifier notre application, allez dans le dossier `src`. 
-On y trouve le point d’entrée de l’application `src/index.js` ainsi que le composant <a href="https://fr.reactjs.org/" target="_blank">**React.js**</a> contenant notre application à savoir `src/Views/MyApp.jsx`.
+On y trouve le point d’entrée de l’application `src/index.js` ainsi que le composant <a href="https://fr.reactjs.org/" target="_blank">**React.js**</a> décrivant l'ensemble de l'application à savoir: `src/App.js`.
 
-Cependant afin de rajouter notre calcul, seul les quatres fichiers suivant nous intéressent:
+Ce dernier va contenir toutes les vues de notre Application.
+Les vues sont situées dans le dossier `src/Views`. Il n'y a qu'une seule vue dans cette Application à savoir `src/Views/SectionAnalysis.js` qui est appelé dans le `src/App.js` de la manière suivante:
+```js
+import SectionAnalysis from './Views/SectionAnalysis/SectionAnalysis';
+```
 
-![src](../../../media/triazur-webapp-src-files.png "src")
+Cependant afin de rajouter notre calcul, seul les deux fichiers suivant nous intéressent:
+- [`SectionAnalysis.js`](#sectionanalysisjs), est le fichier qui affiche notre vue
+- [`calculations.js`](#calculationjs), est le fichier qui contient nos fonctions de calculs, par exemple la fonction permetant de calculer la surface du rectangle, son inertie suivant X,...
 
-- [`calculations.js`](#calculationjs), est le fichier qui contient nos fonctions de calculs, par exemple la fonction permetant de calculer la surface du rectangle
-- [`Inputs.jsx`](#inputsjsx), est le fichier qui affiche nos inputs tels que la hauteur où la largeur du rectangle
-- [`Outputs.jsx`](#outputsjsx), est le fichier qui affiche nos inputs tels que la surface où l'inertie du rectangle
-- [`initialData.js`](#initialdatajs), est le fichier qui contient les valeurs initiales, les descriptifs de inputs et des outputs ainsi que les unités.
 
-### <a name="initialdatajs"></a>Valeurs initiales: initialData.js
+### <a name="sectionanalysisjs"></a>La vue SectionAnalysis
 
 Ce fichier contient donc les données que l'on souhaite afficher et calculer. Chaque élément que l'on souhaite afficher doit avoir la structure suivante:
 
 ```js
-A: {    // Indice de l'élément à afficher
-  name: 'A',    // Nom de l'élément à afficher, doit être égale à l'Indice 
-  text: 'Surf', // Texte qui sera afficher
-  value: 15,    // Valeur initiale
-  description: 'Surface du rectangle en m2', // Description de l'élément
-  unit: 'm2' // Unité de l'élément
-},   
+  const [values, setValues] = useState({
+    b: 2,         // Inputs: Largeur du rectangle
+    h: 3,         // Inputs: Hauteur du rectangle
+    A: 6,         // Outputs: Surface du rectangle
+    Ixx: 4.5      // Outputs: Inertie du rectangle suivant X
+  }); 
 ```
 
 Nous souhaitons calculer l'inertie de la section rectangulaire suivant Y. Pour cela, nous rajoutons dans la partie `initialData.outputs` :
 
 ```js
-Iyy: {
-  name: 'Iyy',
-  text: 'Iyy',
-  value: 31.25,
-  description: 'Inertie du rectangle suivant y',
-  unit: 'm4'
-}  
+  const [values, setValues] = useState({
+    b: 2,         // Inputs: Largeur du rectangle
+    h: 3,         // Inputs: Hauteur du rectangle
+    A: 6,         // Outputs: Surface du rectangle
+    Ixx: 4.5      // Outputs: Inertie du rectangle suivant X,
+    Iyy: 2        // Outputs: Inertie du rectangle suivant Y,
+  }); 
 ```
 
 ### <a name="calculationjs"></a>Le calcul: calculation.js
@@ -296,59 +295,27 @@ Une fois, les modifications implémentées, vous pouvez déployer votre code sur
 Pour cela, il faut d'abord:
 - Créer un compte sur <a href="https://github.com/" target="_blank">GitHub</a>
 
+## <a name="online-webapp"></a>Mettre son application en ligne
+
+Afin de mettre son application en ligne, voir le tutoriel suivant:
+<a href="https://www.tridyme.com/fr/blog/deploiement-avec-netlify">Deployer son Application Web en ligne gratuitement avec Netlify</a>
+
+Si vous souhaitez la mettre en ligne de manière décentralisée avec le Web3.0:
+<a href="https://www.tridyme.com/fr/blog/application-web3-decentralise">Deployer son Application Web décentralisée gratuitement avec Fleek</a>
+
+## <a name="assistance"></a>Communauté & Assistance
+
+Afin de pouvoir échanger sur le sujet et répondre à vos questions, vous pouvez rejoindre notre serveur <a href="https://discord.gg/zgHGa2Tpe4" target="_blank">Discord</a> et suivre nos développements sur notre <a href="https://github.com/tridyme?tab=repositories" target="_blank">Github</a>.
+
+Vous pouvez également nous contacter par email: <a href="contact@tridyme.com" target="_blank">contact@tridyme.com</a>.
 
 
 
-## <a name="online-webapp"></a>Mettre son application en ligne avec Netlify
-
-Afin de mettre son application en ligne, nous allons utiliser <a href="https://www.netlify.com/" target="_blank">**Netlify**</a> qui permet de dépoyer des applications de manière gratuite.
-
-Pour cela, il faut d'abord:
-- Créer un compte Heroku: <a href="https://signup.heroku.com/login" target="_blank">https://signup.heroku.com/login</a>
-- Puis installer Heroku: <a href="https://devcenter.heroku.com/articles/heroku-cli#download-and-install" target="_blank">https://devcenter.heroku.com/articles/heroku-cli#download-and-install</a>
-
-
-Puis utiliser **Git** pour deployer l'application sur <a href="https://www.heroku.com/" target="_blank">**Heroku**</a>:
-
-```shell
-$ git add .
-$ git commit -m "Added a Procfile."
-$ git push heroku master
-#   Heroku credentials
-$ heroku create
-$ git push heroku master
-#   Launching... done
-#      http://example.herokuapp.com deployed to Heroku
-```
-
-Votre application devrait être disponible sur **http://example.herokuapp.com**.
-
-
-Afin de mettre son application en ligne, nous allons utiliser <a href="https://www.heroku.com/" target="_blank">**Heroku**</a> qui permet de dépoyer des applications de manière gratuite.
-
-Pour cela, il faut d'abord:
-- Créer un compte Heroku: <a href="https://signup.heroku.com/login" target="_blank">https://signup.heroku.com/login</a>
-- Puis installer Heroku: <a href="https://devcenter.heroku.com/articles/heroku-cli#download-and-install" target="_blank">https://devcenter.heroku.com/articles/heroku-cli#download-and-install</a>
-
-
-Puis utiliser **Git** pour deployer l'application sur <a href="https://www.heroku.com/" target="_blank">**Heroku**</a>:
-
-```shell
-$ git add .
-$ git commit -m "Added a Procfile."
-$ heroku login
-#   Heroku credentials
-$ heroku create
-$ git push heroku master
-#   Launching... done
-#      http://example.herokuapp.com deployed to Heroku
-```
-
-Votre application devrait être disponible sur **http://example.herokuapp.com**.
+A bientôt sur <a href="http://app.tridyme.com">TriDyme</a>!!
 
 ## License
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 - **[MIT license](http://opensource.org/licenses/mit-license.php)**
-- Copyright 2020 © <a href="http://tridyme.com" target="_blank">TriDyme</a>.
+- Copyright 2021 © <a href="http://tridyme.com" target="_blank">TriDyme</a>.

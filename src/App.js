@@ -18,7 +18,7 @@ import {
 } from '@material-ui/core';
 import Icon from './Icon.svg';
 import Logo from './Logo.png';
-import SectionGeometry from './Views/SectionGeometry/SectionGeometry';
+import SectionAnalysis from './Views/SectionAnalysis/SectionAnalysis';
 
 const Menu = {
   MenuNavBar: [
@@ -78,8 +78,8 @@ const App = () => {
           menu={Menu}
         >
           <Switch>
-            <Route exact path="/" component={SectionGeometry} />
-            <Route exact path="/home" component={SectionGeometry} />
+            <Route exact path="/" component={SectionAnalysis} />
+            <Route exact path="/home" component={SectionAnalysis} />
           </Switch>
         </AppContainerElem>
       </Router>

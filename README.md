@@ -66,7 +66,9 @@ Pour l'installer: <a href="https://code.visualstudio.com/Download" target="_blan
 
 ### Cloner le projet
 
-Afin de créer notre première application, commençons par cloner <a href="https://github.com/tridyme/sdk-structure-app" target="_blank">sdk-structure-app</a> grâce à **git** dans le repertoire ou nous souhaitons :
+Afin de créer notre première application, commençons par cloner <a href="https://github.com/tridyme/sdk-structure-app" target="_blank">sdk-structure-app</a> grâce à **git**.
+
+Pour cela ouvrez votre terminal dans le repertoire ou nous souhaitons avoir notre projet:
 ```shell
 $ git clone https://github.com/tridyme/sdk-structure-app.git
 Cloning into 'sdk-structure-app'...

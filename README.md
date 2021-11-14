@@ -1,12 +1,12 @@
 ## Créer son Application Web
 
-> Afin de permettre aux ingénieurs de pouvoir développer leurs propres applications en ligne, <a href="https://www.tridyme.com/fr/" target="_blank">TriDyme</a> met à disposition le kit de développement <a href="https://github.com/tridyme/sdk-structure-app" target="_blank">sdk-structure-app</a>.
+- Afin de permettre aux ingénieurs de pouvoir développer leurs propres applications en ligne, <a href="https://www.tridyme.com/fr/" target="_blank">TriDyme</a> met à disposition le kit de développement <a href="https://github.com/tridyme/sdk-structure-app" target="_blank">sdk-structure-app</a>.
 
-> Ce projet a pour objectif de servir de base simple pour permettre de créer et de publier gratuitement ses propres applications web.
+- Ce projet a pour objectif de servir de base simple pour permettre de créer et de publier gratuitement ses propres applications web.
 
-La démo est accessible ici: <a href="https://section-analysis.netlify.app/" target="_blank">https://section-analysis.netlify.app/</a>.
+- La démo est accessible ici: <a href="https://section-analysis.netlify.app/" target="_blank">https://section-analysis.netlify.app/</a>.
 
-## Sommaire (Optional)
+## Sommaire
 
 - [Installations](#installations)
 - [Créer notre première application](#create-my-own-app)
@@ -268,11 +268,16 @@ import {
 
 ### <a name="cardelem"></a>CardElem
 
+Ce composant est importé à partir du répertoire `Components` de la manière suivante:
+```js
+import CardElem from '../../Components/CardElem';
+```
+Il permet d'afficher les Cartes contenant les composants `InputElem`.
 
 
 ## <a name="modify-add-components"></a>Modification et ajout de composant
 
-les composants éxistants de <a href="https://github.com/tridyme/webapp-kit-serverless.git" target="_blank">webapp-kit-serverless</a> sont écrits en <a href="https://fr.reactjs.org/" target="_blank">**React.js**</a>, ils sont donc entièrement modifiables.
+les composants éxistants de <a href="https://github.com/tridyme/sdk-structure-app" target="_blank">sdk-structure-app</a> sont écrits en <a href="https://fr.reactjs.org/" target="_blank">**React.js**</a>, ils sont donc entièrement modifiables.
 
 Il est également possible de rajouter des composants. Pour plus d'information, voir les tutoriels suivants:
 - Pour **React.js** sur Openclassrooms: <a href="https://openclassrooms.com/fr/courses/4664381-realisez-une-application-web-avec-react-js" target="_blank">Réalisez une application web avec React.js</a>
@@ -285,11 +290,11 @@ Une fois, les modifications implémentées, vous pouvez déployer votre code sur
 - de travailler à plusieurs dessus
 - et, nous le verrons ci-dessous, de le mettre en ligne
 
-Pour cela, il faut d'abord:
-- Créer un compte sur <a href="https://github.com/" target="_blank">GitHub</a>
+Pour cela, vous pouvez consulter notre article <a href="https://www.tridyme.com/fr/blog/heberger-avec-github">Deployer son Application Web en ligne gratuitement avec Netlify</a>.
 
 ## <a name="online-webapp"></a>Mettre son application en ligne
 
+Une fois que le code de votre Application en héberger sur GitHub, vous pouvez déployer facilement votre Application.
 Afin de mettre son application en ligne, voir le tutoriel suivant:
 <a href="https://www.tridyme.com/fr/blog/deploiement-avec-netlify">Deployer son Application Web en ligne gratuitement avec Netlify</a>
 

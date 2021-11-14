@@ -15,6 +15,8 @@
 - [Modification et ajout de composant](#modify-add-components)
 - [Déployer son code sur GitHub](#github)
 - [Mettre son application en ligne](#online-webapp)
+- [Pour aller plus loin](#plus-loin)
+- [Communauté & Assistance](#assistance)
 - [License](#license)
 
 ## <a name="installations"></a>Installations
@@ -301,6 +303,27 @@ Afin de mettre son application en ligne, voir le tutoriel suivant:
 Si vous souhaitez la mettre en ligne de manière décentralisée avec le Web3.0:
 <a href="https://www.tridyme.com/fr/blog/application-web3-decentralise">Deployer son Application Web décentralisée gratuitement avec Fleek</a>
 
+## <a name="plus-loin"></a>Pour aller plus loin
+
+Vous pouvez utliser la librairie opensource `@tridyme/aec` qui permet de faire des calculs pour le secteur AEC (Architecture Engineering and Construction).
+
+En utilisant cette librairies, vous pouvez remplacer le code de `calculation.js` par le suivant:
+```js
+import { SectionGeometry } from '@tridyme/aec';
+
+//Option 1: utilisation de la librairie @tridyme/aec: https://github.com/tridyme/aec
+const calculations = {
+  outputs: (inputs) => {
+    return {
+      A: new SectionGeometry.RectangularSection(inputs).A,
+      Ixx: new SectionGeometry.RectangularSection(inputs).Iy
+    }
+  }
+}
+
+export default calculations;
+```
+
 ## <a name="assistance"></a>Communauté & Assistance
 
 Afin de pouvoir échanger sur le sujet et répondre à vos questions, vous pouvez rejoindre notre serveur <a href="https://discord.gg/zgHGa2Tpe4" target="_blank">Discord</a> et suivre nos développements sur notre <a href="https://github.com/tridyme?tab=repositories" target="_blank">Github</a>.
@@ -311,7 +334,7 @@ Vous pouvez également nous contacter par email: <a href="contact@tridyme.com" t
 
 A bientôt sur <a href="http://app.tridyme.com">TriDyme</a>!!
 
-## License
+## <a name="license"></a>License
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 

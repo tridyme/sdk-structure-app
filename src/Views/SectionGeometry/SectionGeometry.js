@@ -32,7 +32,7 @@ function SectionGeometry() {
 
   return (
     <Grid container spacing={3}>
-      <Grid item xs={12} sm={6}>
+      <Grid item md={4}>
         <CardElem
           title="Données d'entrée"
           subtitle="Section: dimensions"
@@ -53,7 +53,7 @@ function SectionGeometry() {
           />
         </CardElem>
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid item md={4}>
         <CardElem
           title="Résultats"
           subtitle="Section: caractéristiques"
@@ -73,8 +73,10 @@ function SectionGeometry() {
             onChange={handleChangeValues('Ixx')}
           />
         </CardElem>
+      </Grid>
+      <Grid item md={4}>
         <CardElem
-          title="My Chart"
+          title="Graphique"
           subtitle="Section"
         >
           <ChartElem
@@ -93,7 +95,7 @@ function SectionGeometry() {
           />
         </CardElem>
       </Grid>
-    </Grid>
+    </Grid >
   );
 }
 

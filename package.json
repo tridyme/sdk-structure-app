@@ -1,5 +1,5 @@
 {
-  "name": "tridyme-webapp-kit-serverless",
+  "name": "sdk-structure-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

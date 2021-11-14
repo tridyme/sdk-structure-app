@@ -307,7 +307,7 @@ Si vous souhaitez la mettre en ligne de manière décentralisée avec le Web3.0:
 
 Vous pouvez utliser la librairie opensource `@tridyme/aec` qui permet de faire des calculs pour le secteur AEC (Architecture Engineering and Construction).
 
-En utilisant cette librairies, vous pouvez remplacer le code de `calculation.js` par le suivant:
+En utilisant cette librairie, vous pouvez remplacer le code de `calculation.js` par le suivant:
 ```js
 import { SectionGeometry } from '@tridyme/aec';
 
@@ -323,6 +323,8 @@ const calculations = {
 
 export default calculations;
 ```
+
+Pour plus de détail sur cette librairie, voir son répertoire sur <a href="https://github.com/tridyme/aec" target="_blank">GitHub</a>.
 
 ## <a name="assistance"></a>Communauté & Assistance
 

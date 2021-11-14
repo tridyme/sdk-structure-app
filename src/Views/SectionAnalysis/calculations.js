@@ -20,7 +20,7 @@ const calculations = {
       A: calculations.A(inputs),
       Ixx: calculations.Ixx(inputs)
     }
-  },
+  }, // NE PAS OUBLIER LA VIRGULE
   // CALCULATION FUNCTIONS
   A: (inputs) => {
     const {
@@ -28,7 +28,7 @@ const calculations = {
       h
     } = inputs;
     return b * h;
-  },
+  }, // NE PAS OUBLIER LA VIRGULE
 
   Ixx: (inputs) => {
     const {
@@ -36,7 +36,7 @@ const calculations = {
       h
     } = inputs;
     return b * h ** 3 / 12;
-  }
+  }, // NE PAS OUBLIER LA VIRGULE
 }
 
 export default calculations;

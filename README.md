@@ -2,7 +2,9 @@
 
 > Afin de permettre aux ingénieurs de pouvoir développer leurs propres applications en ligne, <a href="https://www.tridyme.com/fr/" target="_blank">TriDyme</a> met à disposition le kit de développement <a href="https://github.com/tridyme/sdk-structure-app" target="_blank">sdk-structure-app</a>.
 
-> Ce projet a pour objectif à servir de base simple pour permettre de créer et de publier gratuitement ses propres applications web.
+> Ce projet a pour objectif de servir de base simple pour permettre de créer et de publier gratuitement ses propres applications web.
+
+La démo est accessible ici: <a href="https://section-analysis.netlify.app/" target="_blank">https://section-analysis.netlify.app/</a>.
 
 ## Sommaire (Optional)
 
@@ -103,14 +105,53 @@ import SectionAnalysis from './Views/SectionAnalysis/SectionAnalysis';
 ```
 
 Cependant afin de rajouter notre calcul, seul les deux fichiers suivant nous intéressent:
-- [`SectionAnalysis.js`](#sectionanalysisjs), est le fichier qui affiche notre vue
 - [`calculations.js`](#calculationjs), est le fichier qui contient nos fonctions de calculs, par exemple la fonction permetant de calculer la surface du rectangle, son inertie suivant X,...
+- [`SectionAnalysis.js`](#sectionanalysisjs), est le fichier qui affiche notre vue
 
+### <a name="calculationjs"></a>Le calcul: calculation.js
+
+Ce fichier permet de rajouter en un seul endroit toutes les fonctions de calcul que l'on souhaite:
+
+Par exemple, la fonction permettant de calculer la surface d'un section:
+```js
+  A: (inputs) => {
+    const {
+      b,
+      h
+    } = inputs;
+    return b * h;
+  }, // NE PAS OUBLIER LA VIRGULE
+```
+
+Afin de pouvoir calculer l'inertie d'une section rectangulaire suivant l'axe Y, on rajoute donc à la suite la fonction suivante:
+
+```js
+  Iyy: (inputs) => {
+    const {
+      b,
+      h
+    } = inputs;
+    return h * b ** 3 / 12;
+  }, // NE PAS OUBLIER LA VIRGULE
+```
+
+Enfin, on met également à jour la fonction `outputs` qui permet de remettons les résultats du calcul et rajoutant le paramètre Iyy:
+```js
+  outputs: (inputs) => {
+    return {
+      A: calculations.A(inputs),
+      Ixx: calculations.Ixx(inputs),
+      Iyy: calculations.Iyy(inputs)
+    }
+  }, // NE PAS OUBLIER LA VIRGULE
+```
 
 ### <a name="sectionanalysisjs"></a>La vue SectionAnalysis
 
-Ce fichier contient donc les données que l'on souhaite afficher et calculer. Chaque élément que l'on souhaite afficher doit avoir la structure suivante:
+Ce fichier contient donc la vue de notre Application de calcul de section rectangulaire.
+Il affiche les données d'entrée du calcul à savoir la largeur et la hauteur de la section, les résultats du calcul ainsi qu'un graphe permettant de visualiser la section.
 
+Les paramètres que l'on souhaite afficher, se trouve dans à cet endroit:
 ```js
   const [values, setValues] = useState({
     b: 2,         // Inputs: Largeur du rectangle
@@ -120,137 +161,74 @@ Ce fichier contient donc les données que l'on souhaite afficher et calculer. Ch
   }); 
 ```
 
-Nous souhaitons calculer l'inertie de la section rectangulaire suivant Y. Pour cela, nous rajoutons dans la partie `initialData.outputs` :
-
+Nous souhaitons calculer l'inertie de la section rectangulaire suivant Y. Pour cela, nous rajoutons l'attribut Iyy:
 ```js
   const [values, setValues] = useState({
     b: 2,         // Inputs: Largeur du rectangle
     h: 3,         // Inputs: Hauteur du rectangle
     A: 6,         // Outputs: Surface du rectangle
-    Ixx: 4.5      // Outputs: Inertie du rectangle suivant X,
+    Ixx: 4.5,     // Outputs: Inertie du rectangle suivant X,
     Iyy: 2        // Outputs: Inertie du rectangle suivant Y,
   }); 
 ```
 
-### <a name="calculationjs"></a>Le calcul: calculation.js
-
-Ce fichier permet de rajouter en un seul endroit toutes les fonctions de calcul que l'on souhaite. Ces fonctions prennent en paramètre **inputs** qui regroupe l'ensemble des **inputs** que l'on a définit dans la partie `initialData.outputs` du fichier `initialData.js`.
-
-Par exemple, la fonction permettant de calculer la surface d'un section:
+Nous pouvons interagir et modifier les données d'entrées grâce au composant `InputElem`.
 ```js
-surfaceRectangle: (inputs) => {   // Prends en paramètre "inputs"
-  const h = inputs.h.value;   // Dans "inputs", on souhaite avoir la valeur de la hauteur "h" du rectangle
-  const b = inputs.b.value;   // Dans "inputs", on souhaite avoir la valeur de la largeur "b" du rectangle
-
-  const surface = b * h;  // On calcule la surface du rectangle 
-
-  return surface; // On retourne la surface du rectangle
-}, // NE PAS OUBLIER LA VIRGULE
+    <InputElem
+      value={values.A}
+      text={'A'}
+      description={'Surface:'}
+      unit={'m2'}
+      onChange={handleChangeValues('A')}
+    />
 ```
+La fonction `handleChangeValues` permet de gérer la mise à jour de l'affichage suite au calcul.
 
-Afin de pouvoir calculer l'inertie d'une section rectangulaire suivant l'axe Y, on rajoute donc à la suite la fonction suivante:
-
+Afin d'afficher l'inertie suivant Y, nous rajoutons donc un composant `InputElem` pour Iyy de la manière suivante:
 ```js
-inertiaYY: (inputs) => {
-  const h = inputs.h.value;
-  const b = inputs.b.value;
-
-  const Iyy = h * b**3 /12;
-  
-  return Iyy;
-}, // NE PAS OUBLIER LA VIRGULE
-```
-
-
-### <a name="inputsjsx"></a>Les inputs: Inputs.jsx
-
-Une fois les éléments définis, on peut afficher les **inputs** dans le fichier `Inputs.jsx` en insérant un composant `InputElem`:
-
-```html
-<!-- InputElem correspondant à la largeur "b" de la section rectangulaire -->
-<InputElem 
-  data={inputsData.b}
-  updateValue={updateValue}
-/>
-<!-- InputElem correspondant à la hauteur "h" de la section rectangulaire -->
-<InputElem 
-  data={inputsData.h}
-  updateValue={updateValue}
-/>
-```
-
-On spécifie ainsi dans `data={inputsData.h}` que l'on fait référence à l'élément ayant l'indice `h` dans le fichier `initialData.js`.
-
-### <a name="outputsjsx"></a>Les outputs: Outputs.jsx
-
-De même, on peut afficher les **outputs** dans le fichier `Outputs.jsx` en insérant un composant `OutputElem`:
-
-```html
-<!-- OutputElem correspondant à la surface "A" de la section rectangulaire -->
-<OutputElem 
-  data={outputsData.A}
-  inputsData={inputsData}
-  calculationFunctions={calculationFunctions.surfaceRectangle}
-/>
-```
-On spécifie ainsi dans `data={outputsData.A}` que l'on fait référence à l'élément ayant l'indice `A` dans le fichier `initialData.js` et dans `calculationFunctions` la fonction de calcul que l'on souhaite utiliser.
-
-Ainsi pour afficher l'inertie de la section rectangulaire suivant Y, on ajoute le composant suivant:
-
-```html
-<OutputElem 
-  data={outputsData.Iyy}
-  inputsData={inputsData}
-  calculationFunctions={calculationFunctions.inertiaYY}
-/>
+  <CardElem
+    title="Résultats"
+    subtitle="Section: caractéristiques"
+  >
+    <InputElem
+      value={values.A}
+      text={'A'}
+      description={'Surface:'}
+      unit={'m2'}
+      onChange={handleChangeValues('A')}
+    />
+    <InputElem
+      value={values.Ixx}
+      text={'Ixx'}
+      description={'Interie suivant x:'}
+      unit={'m4'}
+      onChange={handleChangeValues('Ixx')}
+    />
+    <InputElem
+      value={values.Iyy}
+      text={'Iyy'}
+      description={'Interie suivant y:'}
+      unit={'m4'}
+      onChange={handleChangeValues('Iyy')}
+    />
+</CardElem>
 ```
 ## <a name="components"></a>Les composants
 
-Nous avons vu les composants `InputElem` et `OutputElem` qui permettent respectivement d'afficher les **inputs** et les **outputs** définis dans **initialData.js**.
-Les composants sont listés dans le dossier `src/Components`:
-- [`InputElem`](#inputelem)
-- [`OutputElem`](#outputelem)
+Nous avons vu le composant `InputElem` qui permet respectivement d'afficher les valeurs définis dans **values**.
+Les composants sont listés dans le dossier `src/Components`. Tout comme les vues, vous êtes libres de les modifier ou de créer vos propres composants.
+Les autres composants présents dans `SectionAnalysis.js` sont:
 - [`ChartElem`](#chartelem)
+- [`Grid`](#grid)
+- [`CardElem`](#cardelem)
 
-### <a name="inputelem"></a>InputElem
-
-`InputElem` sert à définir les **inputs** de l'application, il possède les propriétées:
-- `data`: permet d'associer à un élément définis dans la partie **initialData.inputs** de **initialData.js**
-- `updateValue`: permet de mettre à jour la valeur de l'élément
-
-Exemple:
-
-```html
-<!-- Affiche l'input "h" définit dans le fichier initialData.js -->
-<InputElem 
-  data={inputsData.h}
-  updateValue={updateValue}
-/>
-```
-
-
-### <a name="outputelem"></a>OutputElem
-
-`OutputElem` sert à définir les **outputs** de l'application, il possède les propriétées:
-- `data`: permet d'associer à un élément définis dans la partie **initialData.outputs** de **initialData.js**
-- `inputsData`: permet d'associer les **inputs**
-- `calculationFunctions`: permet d'associer une fonction de calcul définis dans **calculations.js**
-
-Exemple:
-
-```html
-<!-- Affiche l'output "A" définis dans le fichier initialData.js
-  associé à la fonction "surfaceRectangle" définis dans le fichier "calculation.js"
-  -->
-<OutputElem 
-  data={outputsData.A}
-  inputsData={inputsData}
-  calculationFunctions={calculationFunctions.surfaceRectangle}
-/>
-```
 
 ### <a name="chartelem"></a>ChartElem
 
+Il est importé à partir du répertoire `Components` de la manière suivante:
+```js
+import ChartElem from '../../Components/ChartElem';
+```
 `ChartElem` permet d'afficher des graphes, il possède la propriété:
 - `dataForChart`: prend en paramètre un objet qui possède lui-même les propriétées suivantes:
     -   `dataForChart`: qui une chaîne de caractère et qui correspond au titre du graphe
@@ -260,7 +238,7 @@ Exemple:
 
 Exemple:
 
-```html
+```js
 <ChartElem
   dataForChart={{
     chartTitle: 'Section Rectangulaire',
@@ -276,6 +254,21 @@ Exemple:
   }}
 />
 ```
+
+
+### <a name="grid"></a>Grid
+
+Le composant `Grid` provient de la librairie `@material-ui/core` et qui permet de constitué une grille dans laquelle les composants sont organisés et affichés de manière *responsive* (c'est à dire que l'affichage s'adapte à la taille de l'écran).
+Ce composant est importé de la librairie `@material-ui/core` de la manière suivante:
+```js
+import {
+  Grid
+} from '@material-ui/core';
+```
+
+### <a name="cardelem"></a>CardElem
+
+
 
 ## <a name="modify-add-components"></a>Modification et ajout de composant
 

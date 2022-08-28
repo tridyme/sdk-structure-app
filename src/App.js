@@ -79,6 +79,7 @@ const App = () => {
         >
           <Switch>
             <Route exact path="/" component={SectionAnalysis} />
+            <Route exact path="/webkit" component={SectionAnalysis} />
             <Route exact path="/home" component={SectionAnalysis} />
           </Switch>
         </AppContainerElem>

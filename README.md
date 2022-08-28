@@ -10,6 +10,7 @@
 
 - [Installations](#installations)
 - [Créer notre première application](#create-my-own-app)
+- [Intégration dans Tridyme](#tridyme-integration)
 - [Ajouter des fonctionnalités](#add-features)
 - [Les composants](#components)
 - [Modification et ajout de composant](#modify-add-components)
@@ -32,11 +33,11 @@ Les prérequis suivants doivent être installé:
 
 Pour installer Node.js, allez sur <a href="https://nodejs.org/fr/download/" target="_blank">**https://nodejs.org/fr/download/**</a> puis suivez les instructions.
 
-Afin de vérifier que Node.js a été bien installé, vous pouvez utiliser **Invite de Commandes** (cmd.exe sur Windows), et tapez la commande `node -v` afin de vérifier que vous n'avez pas de message d'erreur et que la version de Node est supérieur à la version 6.
+Afin de vérifier que Node.js version 14 a bien été installé, vous pouvez utiliser **Invite de Commandes** (cmd.exe sur Windows), et tapez la commande `node -v` afin de vérifier que vous n'avez pas de message d'erreur et que la version de Node est supérieur à la version 16.
 
 ```shell
 $ node -v
-v10.3.0
+v14.X.X
 ```
 
 **Node.js** est installé avec **npm** est le gestionnaire de modules de Node. Afin de vérifier que **npm** est bien installé et que la version de Node est supérieur à la version 5, tapez la commande `npm -v` :
@@ -94,6 +95,13 @@ $ npm start
 Notez que notre application a dû s'ouvrir automatiquement dans notre navigateur (si ce n'est pas le cas, ouvrez un nouvel onglet dans votre navigateur et saisissez l'URL indiquée par la commande dans le terminal, normalement  http://localhost:3000/ ).
 
 Cette application permet de calculer la surface d'un rectangle ainsi que son inertie suivant X.
+
+## <a name="tridyme-integration"></a>Intégration dans Tridyme
+
+Afin de permettre l'intégration de l'application dans la marketplace de Tridyme il est impératif de nommer la route sur laquelle tridyme redirigera pour accéder à l'application.
+Dans le fichier **App.js**, modifier la route principale "/" en ajoutant un chemin spécifique.
+
+<Route exact path="/[nom de l'application]" component={Application} />
 
 ## <a name="add-features"></a>Ajouter des fonctionnalités
 

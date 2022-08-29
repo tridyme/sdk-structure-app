@@ -4,7 +4,7 @@
 
 - Ce projet a pour objectif de servir de base simple pour permettre de créer et de publier gratuitement ses propres applications web.
 
-- La démo est accessible ici: <a href="https://section-analysis.netlify.app/" target="_blank">https://section-analysis.netlify.app/</a>.
+- La démo est accessible ici: <a href="https://sdk-structure-app.netlify.app/" target="_blank">https://sdk-structure-app.netlify.app/</a>.
 
 ## Sommaire
 

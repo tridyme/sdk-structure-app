@@ -1,7 +1,7 @@
 const { dependencies } = require('./package.json');
 
 module.exports = {
-    name: 'webkit',
+    name: 'SdkStructureApp',
     exposes: {
         './App': './src/App',
     },

@@ -1,7 +1,7 @@
 const { dependencies } = require('./package.json');
 
 module.exports = {
-    name: 'SdkStructureApp',
+    name: 'sdkStructureApp',
     exposes: {
         './App': './src/App',
     },

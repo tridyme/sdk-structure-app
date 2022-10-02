@@ -3,7 +3,8 @@ import Helmet from 'react-helmet';
 import {
   Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
 import './App.css';
 import history from './history';
@@ -25,10 +26,9 @@ const Menu = {
     { text: "", link: "", href: "", icon: "" }
   ],
   MenuSideBarSup: [
-    { text: "Home", link: "/home", href: "", icon: "dashboard" },
+    { text: "Home", link: "/", href: "", icon: "dashboard" },
   ],
   MenuSideBarInf: [
-    // { text: "Documentation", link: "", href: "https://www.tridyme.com/fr/documentation/fr/developpers/tridyme-webapp-kit-serverless", icon: "chrome_reader_mode" },
     { text: "GitHub", link: "", href: "https://github.com/tridyme/sdk-structure-app", icon: "code" }
   ]
 };
@@ -78,9 +78,8 @@ const App = () => {
           menu={Menu}
         >
           <Switch>
-            <Route exact path="/" component={SectionAnalysis} />
-            <Route exact path="/webkit" component={SectionAnalysis} />
-            <Route exact path="/home" component={SectionAnalysis} />
+            <Route exact path="/my-app-name" component={SectionAnalysis} />
+            <Redirect from="/" to="/my-app-name" />
           </Switch>
         </AppContainerElem>
       </Router>

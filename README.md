@@ -101,7 +101,10 @@ Cette application permet de calculer la surface d'un rectangle ainsi que son ine
 Afin de permettre l'intégration de l'application dans la marketplace de Tridyme il est impératif de nommer la route sur laquelle tridyme redirigera pour accéder à l'application.
 Dans le fichier **App.js**, modifier la route principale "/" en ajoutant un chemin spécifique.
 
-<Route exact path="/[nom de l'application]" component={Application} />
+```js
+<Route exact path="/[nom-de-mon-application]" component={Application} />
+<Redirect from="/" to="/[nom-de-mon-application]" />
+```
 
 ## <a name="add-features"></a>Ajouter des fonctionnalités
 
